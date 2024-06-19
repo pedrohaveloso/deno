@@ -1,0 +1,56 @@
+<?php $current_page = $attributes['current-page'] ?? '' ?>
+
+<nav class="flex justify-between px-8 py-4 bg-indigo-50">
+  <section class="flex gap-2 items-center">
+    <a href="/" aria-label="Página inicial" class="mr-4">
+      <_icon name="logo" class="*:!h-10 *:!w-10"></_icon>
+    </a>
+
+    <button aria-label="Menu" class="hidden">
+      <_icon name="menu"></_icon>
+    </button>
+
+    <menu class="flex gap-4">
+      <li>
+        <a href="/home" class="flex gap-1 <?= $current_page == 'home' ? 'font-bold' : '' ?>">
+          <_icon name="home"></_icon>
+          Início
+        </a>
+      </li>
+
+      <li>
+        <a href="/products" class="flex gap-1 <?= $current_page == 'products' ? 'font-bold' : '' ?>">
+          <_icon name="products"></_icon>
+          Produtos
+        </a>
+      </li>
+
+      <li>
+        <a href="/contact" class="flex gap-1 <?= $current_page == 'contact' ? 'font-bold' : '' ?>">
+          <_icon name="contact"></_icon>
+          Atendimento
+        </a>
+      </li>
+    </menu>
+  </section>
+
+  <section class="flex gap-4 items-center">
+    <a href="/cart" aria-label="Seu carrinho" class="flex gap-2">
+      <_icon name="cart"></_icon>
+      Seu carrinho
+    </a>
+
+    <search class="flex h-10 max-w-64 bg-indigo-100 rounded-2xl">
+      <input type="text" placeholder="Pesquisar..." class="w-full h-full bg-transparent ps-4 outline-none">
+
+      <button aria-label="Pesquisar" class="pe-4">
+        <_icon name="search"></_icon>
+      </button>
+    </search>
+
+    <button aria-label="Sua conta"
+      class="bg-indigo-100 hover:bg-indigo-200 transition-all duration-500 rounded-2xl h-10 w-10 grid place-items-center">
+      <_icon name="person"></_icon>
+    </button>
+  </section>
+</nav>

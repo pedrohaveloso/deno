@@ -33,8 +33,6 @@ if (!function_exists('view')) {
             $attributes[$attr[1]] = $attr[2];
           }
 
-          extract($attributes);
-
           ob_start();
           include __BASEDIR__ . '/app/ui/components/' . str_replace('.', '/', $_name) . '.phtml';
           $child = ob_get_clean();
