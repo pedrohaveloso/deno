@@ -2,11 +2,18 @@
 
 get('/home', 'home@index');
 
-get('/auth/choice', 'auth@choice');
+group(
+  '/auth',
+  function () {
+    get('/choice', 'auth@choice');
 
-get('/auth/login', 'auth@login');
-post('/auth/login', 'auth@login_post');
+    get('/login', 'auth@login');
+    post('/login', 'auth@login_post');
 
-get('/auth/register', 'auth@register');
-post('/auth/register', 'auth@register_post');
+    get('/register', 'auth@register');
+    post('/register', 'auth@register_post');
+  },
+  [empty(Session::get('user'))],
+  // fn() => redirect('/home')
+);
 

@@ -14,7 +14,7 @@
   </div>
 
   <div class="flex-grow grid place-items-center">
-    <form hx-post="/auth/login" hx-trigger="submit" hx-target="#form-inputs" hx-swap="afterend"
+    <form hx-post="/auth/login" hx-trigger="submit" hx-target="#error"
       class="max-w-[500px] w-full p-2 sm:p-6 flex flex-col items-center justify-center gap-8 h-full">
       <h2 class="text-3xl font-medium text-indigo-800">
         Entre com sua conta
@@ -29,6 +29,8 @@
           placeholder="************">
         </_inputs.generic>
       </div>
+
+      <div id="error"></div>
 
       <button type="submit"
         class="bg-indigo-800 outline-none rounded-2xl w-full h-12 sm:h-14 text-indigo-50 hover:bg-indigo-900 transition-all duration-500">

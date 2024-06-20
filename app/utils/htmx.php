@@ -4,6 +4,11 @@ namespace App\Utils;
 
 class HTMX
 {
+  public static function response()
+  {
+    exit;
+  }
+
   public static function redirect(string $to)
   {
     ?>

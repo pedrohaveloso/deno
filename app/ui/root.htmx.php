@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
   <meta charset="UTF-8">
@@ -17,6 +17,15 @@
 
     * {
       font-family: 'Poppins';
+    }
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:focus {
+      transition: background-color 600000s 0s, color 600000s 0s;
+    }
+
+    input[data-autocompleted] {
+      background-color: transparent !important;
     }
   </style>
 

@@ -1,13 +1,13 @@
 <main class="flex p-2 w-screen flex-grow">
   <div class="flex-grow grid place-items-center">
-    <form hx-post="/auth/register" hx-trigger="submit" hx-target="#form-inputs" hx-swap="afterend"
+    <form hx-post="/auth/register" hx-trigger="submit" hx-target="#error"
       class="max-w-[500px] w-full p-2 sm:p-6 flex flex-col items-center justify-center gap-8 h-full">
       <h2 class="text-3xl font-medium text-indigo-800">
         Criar conta
       </h2>
 
       <div class="flex flex-col gap-4 w-full" id="form-inputs">
-        <_inputs.generic id="username" name="username" label="Nome" required="true" icon="person"
+        <_inputs.generic id="fullname" name="fullname" label="Nome" required="true" icon="person"
           placeholder="João da Silva...">
         </_inputs.generic>
 
@@ -19,6 +19,8 @@
           placeholder="************">
         </_inputs.generic>
       </div>
+
+      <div id="error"></div>
 
       <button type="submit"
         class="bg-indigo-800 outline-none rounded-2xl w-full h-12 sm:h-14 text-indigo-50 hover:bg-indigo-900 transition-all duration-500">

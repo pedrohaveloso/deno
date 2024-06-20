@@ -3,6 +3,10 @@
 if (!function_exists('route')) {
   function route(string $path, string|Closure $action): void
   {
+    if (!empty($GLOBALS['group_route_path'])) {
+      $path = $GLOBALS['group_route_path'] . $path;
+    }
+
     $current_uri = explode('?', $_SERVER['REQUEST_URI']);
 
     $current_path = $current_uri[0];
