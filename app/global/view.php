@@ -11,6 +11,12 @@ if (!function_exists('view')) {
 
     $components_pattern = '/<_([a-zA-Z0-9_.]+)([^>]*)>(.*?)<\/_[a-zA-Z0-9_.]+>/s';
 
+    if (isset($layout)) {
+      ob_start();
+      include __BASEDIR__ . '/app/ui/layouts/' . $layout . '.layout.php';
+      $inner_content = ob_get_clean();
+    }
+
     while (str_contains($inner_content, '<_')) {
       $inner_content = preg_replace_callback(
         $components_pattern,
