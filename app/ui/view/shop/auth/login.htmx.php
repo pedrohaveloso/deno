@@ -14,12 +14,13 @@
   </div>
 
   <div class="flex-grow grid place-items-center">
-    <form class="max-w-[500px] w-full p-2 sm:p-6 flex flex-col items-center justify-center gap-8 h-full">
+    <form hx-post="/auth/login" hx-trigger="submit" hx-target="#form-inputs" hx-swap="afterend"
+      class="max-w-[500px] w-full p-2 sm:p-6 flex flex-col items-center justify-center gap-8 h-full">
       <h2 class="text-3xl font-medium text-indigo-800">
         Entre com sua conta
       </h2>
 
-      <div class="flex flex-col gap-4 w-full">
+      <div class="flex flex-col gap-4 w-full" id="form-inputs">
         <_inputs.generic id="email" name="email" label="E-mail" icon="contact" required="true" type="email"
           placeholder="joaosilva@email.com">
         </_inputs.generic>

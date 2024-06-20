@@ -5,7 +5,7 @@
 
     <input id="<?= $attributes['id'] ?? '' ?>" name="<?= $attributes['name'] ?? '' ?>"
       type="<?= $attributes['type'] ?? 'text' ?>" placeholder="<?= $attributes['placeholder'] ?? '' ?>"
-      class="bg-transparent px-6 py-4 w-full outline-none" <?= isset($attributes['required']) ? 'required' : '' ?>>
+      class="bg-transparent rounded-2xl px-6 py-4 w-full outline-none" <?= isset($attributes['required']) ? 'required' : '' ?>>
 
     <? if (!empty($attributes['icon'])): ?>
       <_icon name="<?= $attributes['icon'] ?>" class="pe-6 *:!fill-gray-700"></_icon>

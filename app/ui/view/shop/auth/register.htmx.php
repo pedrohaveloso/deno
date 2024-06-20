@@ -1,11 +1,12 @@
 <main class="flex p-2 w-screen flex-grow">
   <div class="flex-grow grid place-items-center">
-    <form class="max-w-[500px] w-full p-2 sm:p-6 flex flex-col items-center justify-center gap-8 h-full">
+    <form hx-post="/auth/register" hx-trigger="submit" hx-target="#form-inputs" hx-swap="afterend"
+      class="max-w-[500px] w-full p-2 sm:p-6 flex flex-col items-center justify-center gap-8 h-full">
       <h2 class="text-3xl font-medium text-indigo-800">
         Criar conta
       </h2>
 
-      <div class="flex flex-col gap-4 w-full">
+      <div class="flex flex-col gap-4 w-full" id="form-inputs">
         <_inputs.generic id="username" name="username" label="Nome" required="true" icon="person"
           placeholder="João da Silva...">
         </_inputs.generic>
