@@ -12,7 +12,7 @@ class View
     include __BASEDIR__ . '/app/ui/view/' . $name . '.htmx.php';
     $inner_content = ob_get_clean();
 
-    $components_pattern = '/<_([a-zA-Z0-9_.]+)([^>]*)>(.*?)<\/_[a-zA-Z0-9_.]+>/s';
+    $components_pattern = '/<_([a-zA-Z0-9_.]+)([^>]*)>(.*?)<\/_\1>/s';
 
     if (isset($layout)) {
       ob_start();
@@ -24,8 +24,7 @@ class View
       $inner_content = preg_replace_callback(
         $components_pattern,
         function ($matches) {
-          $_name = $matches[1];
-
+          $name = $matches[1];
           $attributes_string = $matches[2];
           $children = $matches[3];
 
@@ -43,7 +42,12 @@ class View
           }
 
           ob_start();
-          include __BASEDIR__ . '/app/ui/components/' . str_replace('.', '/', $_name) . '.phtml';
+
+          $scope = function () use ($name, $children, $attributes) {
+            include __BASEDIR__ . '/app/ui/components/' . str_replace('.', '/', $name) . '.phtml';
+          };
+          $scope();
+
           $child = ob_get_clean();
 
           return $child;
