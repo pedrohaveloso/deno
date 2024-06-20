@@ -1,7 +1,10 @@
 <?php
 
-if (!function_exists('htmx_redirect')) {
-  function htmx_redirect(string $to)
+namespace App\Utils;
+
+class HTMX
+{
+  public static function redirect(string $to)
   {
     ?>
     <div>

@@ -1,7 +1,10 @@
 <?php
 
-if (!function_exists('view')) {
-  function view(string $name, ...$attributes)
+namespace App\Utils;
+
+class View
+{
+  public static function render(string $name, ...$attributes)
   {
     extract($attributes);
 

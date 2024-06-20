@@ -9,7 +9,7 @@
       Para ter acesso em todos os nossos serviços e finalizar suas compras, entre com sua conta.
     </p>
 
-    <img src="/public/assets/images/login_banner.webp" alt="Imagem de fundo de login"
+    <img loading="lazy" src="/public/assets/images/login_banner.webp" alt="Imagem de fundo de login"
       class="rounded-2xl absolute w-full h-full">
   </div>
 
