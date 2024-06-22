@@ -1,34 +1,18 @@
 <?
 
-use App\Core\Router;
+use App\Core\Router as r;
+use App\Core\Session;
 
-Router::get('/', fn() => 'Hello');
-
-Router::group(
-  '/profile',
-  [
-    Router::get('/me', fn() => 'Hello'),
-    Router::get('/others', fn() => 'Hello'),
-  ]
-);
-
-Router::group(
+r::group(
   '/auth',
   [
-    Router::get('/choice', fn() => 'Hello'),
+    r::get('/choice', 'auth@choice'),
 
-    Router::get('/login', fn() => 'Hello'),
-    Router::post('/login', fn() => 'Hello'),
+    r::get('/login', 'auth@login'),
+    r::post('/login', 'auth@login_post'),
 
-    Router::get('/register', fn() => 'Hello'),
-    Router::post('/register', fn() => 'Hello'),
+    r::get('/register', 'auth@register'),
+    r::post('/register', 'auth@register_post'),
   ],
-  Router::guard([true, true, false], function () { // Clausula guarda de exemplo.
-    header('Location: /');
-    exit;
-  })
+  r::guard(fn() => !empty (Session::get('user')), fn() => header('Location: /'))
 );
-
-Router::dispatch();
-
-// var_dump(Router::$routes);

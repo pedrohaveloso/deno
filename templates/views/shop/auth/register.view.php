@@ -36,7 +36,7 @@
   <div
     class="hidden md:flex *:text-indigo-50 gap-8 text-center min-h-fit p-16 max-w-[50%] relative flex-grow flex-col items-center justify-center rounded-xl">
     <h2 class="text-4xl lg:text-5xl xl:text-6xl z-50">
-      Bem-vindo à <strong>Deco</strong>
+      Bem-vindo à <strong>Deno</strong>
     </h2>
 
     <p class="text-xl lg:text-2xl z-50 max-w-[600px]">

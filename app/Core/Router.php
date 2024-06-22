@@ -2,220 +2,96 @@
 
 namespace App\Core;
 
-// use App\Core\Router\Group;
-// use App\Core\Router\Guard;
+use Closure;
 
-// class Router
-// {
-//   public static array $routes = [];
+class Router
+{
+  private static $routes = [];
 
-//   public static function add(Group $group)
-//   {
-//     foreach ($group->routes as $method => $routes) {
-//       foreach ($routes as $route) {
-//         if (is_array($route)) {
-//           $full_path = rtrim($group->path, '/') . '/' . ltrim(key($route), '/');
-//           $action = current($route);
+  private static $guards = [];
 
-//           $route_arr = self::build_route_array($full_path, $action, $method);
+  private static $guard_counter = 1;
 
-//           if ($group->guard) {
-//             $route_arr['guard'] = $group->guard;
-//           }
+  private static $on = [];
 
-//           self::merge_routes(self::$routes, $route_arr);
-//         }
-//       }
-//     }
-//   }
+  public static function group(string $path, array $routes, ?array $guard = null)
+  {
+    foreach ($routes as $route) {
+      $route['path'] = $path . $route['path'];
+      $route['guard'] = null;
 
-//   private static function build_route_array(
-//     string $path,
-//     \Closure|string $action,
-//     string $method
-//   ): array {
-//     $parts = explode('/', trim($path, '/'));
+      if ($guard !== null) {
+        self::$guards[$guard['id']] = $guard['guard'];
+        $route['guard'] = $guard['id'];
+      }
 
-//     $route = [];
+      self::$routes[$route['method']][$route['path']] = [
+        'action' => $route['action'],
+        'guard' => $route['guard'],
+      ];
+    }
+  }
 
-//     $current = &$route;
+  public static function guard(Closure $condition, Closure $on_guard)
+  {
+    return [
+      'id' => self::$guard_counter++,
+      'guard' => [
+        'condition' => $condition,
+        'on_guard' => $on_guard
+      ]
+    ];
+  }
 
-//     foreach ($parts as $part) {
-//       $current[$part] = [];
-//       $current = &$current[$part];
-//     }
+  public static function get(string $path, string|Closure $action)
+  {
+    return ['method' => 'GET', 'path' => $path, 'action' => $action];
+  }
 
-//     $current = [
-//       'action' => $action,
-//       'method' => $method
-//     ];
+  public static function post(string $path, string|Closure $action)
+  {
+    return ['method' => 'POST', 'path' => $path, 'action' => $action];
+  }
 
-//     return $route;
-//   }
+  public static function on(int $status_code, string|Closure $action)
+  {
+    self::$on[$status_code] = $action;
+  }
 
-//   private static function merge_routes(array &$base, array $new)
-//   {
-//     foreach ($new as $key => $value) {
-//       if (is_array($value) && isset($base[$key]) && is_array($base[$key])) {
-//         self::merge_routes($base[$key], $value);
-//       } else {
-//         $base[$key] = $value;
-//       }
-//     }
-//   }
+  public static function dispatch()
+  {
+    $current_uri = explode('?', $_SERVER['REQUEST_URI']);
+    $current_method = $_SERVER['REQUEST_METHOD'];
 
-//   public static function group(string $path, array $routes, ?Guard $guard = null)
-//   {
-//     self::add(new Group($path, $routes, $guard));
-//   }
+    $path = $current_uri[0];
 
-//   public static function get(string $path, \Closure|string $action)
-//   {
-//     return ['GET' => [$path => $action]];
-//   }
+    if (empty($action = self::$routes[$current_method][$path])) {
+      $action = self::$on[404];
+    }
 
-//   public static function post(string $path, \Closure|string $action)
-//   {
-//     return ['POST' => [$path => $action]];
-//   }
+    if (is_array($action)) {
+      $guard = $action['guard'];
+      $action = $action['action'];
 
-//   public static function put(string $path, \Closure|string $action)
-//   {
-//     return ['PUT' => [$path => $action]];
-//   }
+      $guard = self::$guards[$guard];
 
-//   public static function delete(string $path, \Closure|string $action)
-//   {
-//     return ['DELETE' => [$path => $action]];
-//   }
+      if ($guard['condition']()) {
+        $guard['on_guard']();
+      }
+    }
 
-//   public static function guard(array $conditions, \Closure $on): Guard
-//   {
-//     return new Guard($conditions, $on);
-//   }
+    if (is_string($action)) {
+      $action = explode('@', $action);
 
-//   public static function dispatch()
-//   {
-//     $uri = $_SERVER['REQUEST_URI'];
-//     $method = $_SERVER['REQUEST_METHOD'];
+      $class = 'App\\Controller\\' . mb_convert_case($action[0], MB_CASE_TITLE) . 'Controller';
+      $method = $action[1];
 
-//     $parts = explode('/', trim($uri, '/'));
-//     $current = self::$routes;
+      $class = new $class();
+      $class->$method();
 
-//     foreach ($parts as $part) {
-//       if (isset($current[$part])) {
-//         $current = $current[$part];
-//       } else {
-//         http_response_code(404);
-//         echo "404 Not Found";
-//         return;
-//       }
-//     }
+      return;
+    }
 
-//     if (isset($current['method']) && $current['method'] === $method) {
-//       if (isset($current['guard']) && $current['guard'] instanceof Guard) {
-//         $current['guard']->start();
-//       }
-
-//       $action = $current['action'];
-
-//       if ($action instanceof \Closure) {
-//         $action();
-//       } else {
-//         $action = explode('@', $action);
-
-//         $class = 'App\\Controller\\' .
-//           (mb_convert_case(str_replace('/', '\\\\', $action[0]), MB_CASE_TITLE)) .
-//           'Controller';
-
-//         $class = new $class();
-//         $method = $action[1];
-
-//         $class->$method();
-//       }
-//     } else {
-//       http_response_code(405);
-//       echo "405 Method Not Allowed";
-//     }
-//   }  
-// }
-
-
-// class Router
-// {
-//   private static $routes = [];
-//   private static $group_prefix = '';
-//   private static $group_middleware = null;
-
-//   public static function get($path, $callback)
-//   {
-//     self::add_route('GET', $path, $callback);
-//   }
-
-//   public static function post($path, $callback)
-//   {
-//     self::add_route('POST', $path, $callback);
-//   }
-
-//   private static function add_route($method, $path, $callback)
-//   {
-//     $full_path = self::$group_prefix . $path;
-//     self::$routes[] = [
-//       'method' => $method,
-//       'path' => $full_path,
-//       'callback' => $callback,
-//       'middleware' => self::$group_middleware,
-//     ];
-//   }
-
-//   public static function group($prefix, $routes, $middleware = null)
-//   {
-//     $previous_prefix = self::$group_prefix;
-//     $previous_middleware = self::$group_middleware;
-
-//     self::$group_prefix .= $prefix;
-//     self::$group_middleware = $middleware;
-
-//     foreach ($routes as $route) {
-//       if (is_callable($route)) {
-//         $route();
-//       }
-//     }
-
-//     self::$group_prefix = $previous_prefix;
-//     self::$group_middleware = $previous_middleware;
-//   }
-
-//   public static function guard($conditions, $callback)
-//   {
-//     return function () use ($conditions, $callback) {
-//       foreach ($conditions as $condition) {
-//         if (!$condition) {
-//           $callback();
-//           return false;
-//         }
-//       }
-//       return true;
-//     };
-//   }
-
-//   public static function dispatch()
-//   {
-//     $method = $_SERVER['REQUEST_METHOD'];
-//     $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-
-//     foreach (self::$routes as $route) {
-//       if ($method == $route['method'] && preg_match("#^{$route['path']}$#", $path)) {
-//         if ($route['middleware'] === null || call_user_func($route['middleware'])) {
-//           call_user_func($route['callback']);
-//           return;
-//         }
-//       }
-//     }
-
-//     if (!headers_sent()) {
-//       http_response_code(404);
-//       echo "404 Not Found";
-//     }
-//   }
-// }
+    $action();
+  }
+}

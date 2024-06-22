@@ -1,7 +1,5 @@
 <?
 
-use App\Core\Router;
-
 /**
  * -----------------------------------------------------------------------------
  * Define as constantes globais utilizadas pelo projeto e inicia o fluxo direto
@@ -12,23 +10,11 @@ use App\Core\Router;
  * -----------------------------------------------------------------------------
  */
 
-const PROJECTDIR = __DIR__ . '/../';
-const BOOTSTRAPDIR = __DIR__;
-
-const TEMPLATESDIR = __DIR__ . '/../templates/';
-const VIEWSDIR = TEMPLATESDIR . '/views/';
-const COMPONENTSDIR = TEMPLATESDIR . '/components/';
-const LAYOUTSDIR = TEMPLATESDIR . '/layouts/';
-
-const ROUTESDIR = __DIR__ . '/../routes/';
-const CONFIGDIR = __DIR__ . '/../priv/config/';
-
-include_once BOOTSTRAPDIR . '/databases.php';
+include __DIR__ . '/constants.php';
 
 foreach (glob(ROUTESDIR . '/*.php') as $router_file) {
   include $router_file;
 }
 
-Router::dispatch();
-
-$GLOBALS['___dbs___'] = null;
+App\Core\Router::dispatch();
+App\Core\Database::close_all();

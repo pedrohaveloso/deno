@@ -11,12 +11,12 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="<?= LOCALE ?>">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="HTMX + PHP page">
+  <meta name="description" content="Deno shop page">
 
   <link rel="shortcut icon" href="/public/assets/favicon.ico" type="image/x-icon">
 
@@ -41,7 +41,9 @@
     }
   </style>
 
-  <title>HTMX</title>
+  <title>
+    Deno <?= isset($page_title) ? '|' . $page_title : '' ?>
+  </title>
 </head>
 
 <body class="*:text-indigo-950 min-h-screen flex flex-col">

@@ -9,7 +9,7 @@ class View
     extract($attributes);
 
     ob_start();
-    include VIEWSDIR . $name . '.htmx.php';
+    include VIEWSDIR . $name . '.view.php';
     $inner_content = ob_get_clean();
 
     $components_pattern = '/<_([a-zA-Z0-9_.]+)([^>]*)>(.*?)<\/_\1>/s';
@@ -56,6 +56,6 @@ class View
       );
     }
 
-    include TEMPLATESDIR . '/root.htmx.php';
+    include TEMPLATESDIR . '/root.template.php';
   }
 }

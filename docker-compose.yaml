@@ -24,8 +24,8 @@ services:
       POSTGRES_PASSWORD: dev
       POSTGRES_DB: deno_dev
     volumes:
-      - ./priv/data/cache/docker/database:/var/lib/postgresql/data
-      - ./priv/data/database.sql:/docker-entrypoint-initdb.d/create_database.sql
+      - ./priv/cache/docker/postgresql:/var/lib/postgresql/data
+      - ./priv/repo/database.sql:/docker-entrypoint-initdb.d/create_database.sql
     ports:
       - 1111:5432
 

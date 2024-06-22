@@ -19,12 +19,14 @@ class Session
   public static function set(string $key, mixed $value): void
   {
     self::start();
+
     $_SESSION['SITE_SESSION'][$key] = $value;
   }
 
   public static function get(string $key): mixed
   {
     self::start();
-    return $_SESSION['SITE_SESSION'][$key];
+
+    return $_SESSION['SITE_SESSION'][$key] ?? null;
   }
 }

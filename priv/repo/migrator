@@ -4,19 +4,18 @@ if (empty($argv[1])) {
   return;
 }
 
-include __DIR__ . '/../bootstrap/db_connections.php';
+include __DIR__ . '/../../bootstrap/constants.php';
+include __DIR__ . '/../vendor/autoload.php';
 
 function db(string $name = 'primary'): PDO
 {
-  return $GLOBALS['db___primary'];
+  return App\Core\Database::get($name);
 }
 
-if ($argv[1] == 'migrate') {
-  migrate();
-}
-
-if ($argv[1] == 'up' && !empty($argv[2])) {
-  up($argv[2]);
+switch ($argv[1]) {
+  case 'migrate':
+    migrate();
+    break;
 }
 
 function migration_id($migration_name)
@@ -24,14 +23,10 @@ function migration_id($migration_name)
   return substr($migration_name, 0, 14);
 }
 
-function up(string $name)
-{
-  $files = glob(__DIR__ . '/migrations/*.php');
-}
 
 function migrate()
 {
-  $files = glob(__DIR__ . '/migrations/*.php');
+  $files = glob(MIGRATIONSDIR . '/*.php');
 
   $migrations = array_map(function ($file) {
     $migration = include $file;
@@ -75,3 +70,5 @@ function migrate()
 
   }, $migrations);
 }
+
+App\Core\Database::close_all();
