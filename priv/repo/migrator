@@ -1,8 +1,48 @@
 <?
 
-include __DIR__ . '/../../bootstrap/constants.php';
-include __DIR__ . '/../vendor/autoload.php';
-
+/**
+ * -----------------------------------------------------------------------------
+ * # Migrator
+ * 
+ * É responsável por realizar as migrações do projeto, tanto o UP 
+ * quanto o DOWN.
+ * 
+ * Para utilizar o migrator, é necessário entrar no container do PHP, tente (com
+ * o projeto rodando no docker e dentro da pasta raiz):
+ * 
+ * sudo docker exec -it php-fpm bash
+ * 
+ * Você entrará no container do PHP. Agora, para utilizar o migrator, faça:
+ * 
+ * php /www/priv/repo/migrator [OPÇÃO]
+ * 
+ * As opções disponíveis são:
+ * 
+ * ## up ?[(int > 0) $number]:
+ *  
+ * Como padrão, fará UP de todas as migrations que ainda não foram processadas.
+ * Caso receba um segundo argumento (número inteiro maior que 0), irá upar a 
+ * quantidade de migrations equivalente ao número fornecido.
+ * 
+ * ### Exemplos:
+ * 
+ * php /www/priv/repo/migrator up 1
+ * php /www/priv/repo/migrator up 5
+ * php /www/priv/repo/migrator up
+ * 
+ * ## down ?[(int > 0) $number]:
+ * 
+ * Como padrão, fará o DOWN de todas as migrations que já foram processadas.
+ * Caso receba um segundo argumento (número inteiro maior que 0), irá fazer o
+ * down da quantidade de migrations equivalente ao número fornecido.
+ * 
+ * ### Exemplos:
+ * 
+ * php /www/priv/repo/migrator down 1
+ * php /www/priv/repo/migrator down 5
+ * php /www/priv/repo/migrator down
+ * -----------------------------------------------------------------------------
+ */
 class Migrator
 {
   private $migrated = [];
@@ -37,10 +77,6 @@ class Migrator
 
   public function start(array $arguments): void
   {
-    if (empty($arguments[1])) {
-      return;
-    }
-
     if (!empty($arguments[2]) && !ctype_digit($arguments[2])) {
       throw new Exception('Quantidade ' . $arguments[2] . ' inválida.');
     }
@@ -58,7 +94,7 @@ class Migrator
       'down' => fn($number) => $this->down($number),
     ];
 
-    ($options[$arguments[1]] ?? fn($_) => $this->invalid_option())($number);
+    ($options[$arguments[1] ?? 0] ?? fn($_) => $this->invalid_option())($number);
 
     $this->save_migrated_file();
 
@@ -67,7 +103,8 @@ class Migrator
 
   private function invalid_option(): void
   {
-    echo 'Opção inválida' . PHP_EOL;
+    echo 'Opção inválida.' . PHP_EOL;
+    echo 'Consulte a documentação para ver as opções.' . PHP_EOL;
   }
 
   private function migration_name(string $filename): string
@@ -198,5 +235,8 @@ class Migrator
     }
   }
 }
+
+include __DIR__ . '/../../bootstrap/constants.php';
+include __DIR__ . '/../vendor/autoload.php';
 
 (new Migrator())->start($argv);
