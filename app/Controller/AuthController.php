@@ -5,47 +5,64 @@ namespace App\Controller;
 use App\Repository\UserRepository;
 
 use App\Core\Session;
-use App\Core\HTTP\HTMX;
-use App\Core\HTTP\Request;
-use App\Core\HTTP\View;
+use App\Core\HTTP\{HTMX, Request, View};
 
 class AuthController extends Controller
 {
   public function choice()
   {
-    View::render('shop/auth/choice', layout: 'shop');
+    return View::render('shop/auth/choice', layout: 'shop');
   }
 
   public function login()
   {
-    View::render('shop/auth/login', layout: 'shop');
+    return View::render('shop/auth/login', layout: 'shop');
   }
 
   public function login_post()
   {
-    HTMX::redirect('/home');
+    $user = Request::post_data();
+
+    $db_user = UserRepository::get_by_email($user['email']);
+
+    if (
+      empty($db_user)
+      || password_verify($user['password'], $db_user['password']) == false
+    ) {
+      ?>
+      <p class="text-red-500">
+        <?= _('E-mail ou senha inválido(s).') ?>
+      </p>
+      <?
+
+      return HTMX::response();
+    }
+
+    Session::set_user($db_user);
+
+    return HTMX::redirect('/home');
   }
 
   public function register()
   {
-    View::render('shop/auth/register', layout: 'shop');
+    return View::render('shop/auth/register', layout: 'shop');
   }
 
   public function register_post()
   {
-    $register_form = Request::post_data();
+    $user = Request::post_data();
 
-    if (UserRepository::get_by_email($register_form['email']) != null) {
+    if (UserRepository::get_by_email($user['email']) != null) {
       ?>
       <p class="text-red-500">
-        <?= gettext('E-mail já cadastrado.') ?>
+        <?= _('E-mail já cadastrado.') ?>
       </p>
       <?
 
-      HTMX::response();
+      return HTMX::response();
     }
 
-    $errors = UserRepository::insert_changeset($register_form);
+    $errors = UserRepository::insert_changeset($user);
 
     if (!empty($errors)) {
       ?>
@@ -58,14 +75,13 @@ class AuthController extends Controller
       </p>
       <?
 
-      HTMX::response();
+      return HTMX::response();
     }
 
-    Session::set('user', [
-      'email' => $register_form['email'],
-      'name' => $register_form['fullname']
-    ]);
+    UserRepository::insert($user);
 
-    HTMX::redirect('/home');
+    Session::set_user($user);
+
+    return HTMX::redirect('/home');
   }
 }

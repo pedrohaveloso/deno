@@ -1,18 +1,26 @@
 <?
 
-use App\Core\Router as r;
+use App\Core\Router;
 use App\Core\Session;
+use App\Core\HTTP\Response;
 
-r::group(
+Router::group('/', routes: [
+  Router::get('/contact', 'home@contact')
+]);
+
+Router::group(
   '/auth',
-  [
-    r::get('/choice', 'auth@choice'),
+  routes: [
+    Router::get('/choice', 'auth@choice'),
 
-    r::get('/login', 'auth@login'),
-    r::post('/login', 'auth@login_post'),
+    Router::get('/login', 'auth@login'),
+    Router::post('/login', 'auth@login_post'),
 
-    r::get('/register', 'auth@register'),
-    r::post('/register', 'auth@register_post'),
+    Router::get('/register', 'auth@register'),
+    Router::post('/register', 'auth@register_post'),
   ],
-  r::guard(fn() => !empty (Session::get('user')), fn() => header('Location: /'))
+  guard: Router::guard(
+    fn() => Session::user_is_logged(),
+    fn() => Response::redirect('/')
+  )
 );

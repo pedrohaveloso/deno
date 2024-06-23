@@ -17,21 +17,30 @@ class UserRepository extends Repository
     return $query->fetchAll(\PDO::FETCH_ASSOC)[0] ?? null;
   }
 
-  public static function insert(array $user): bool
+  public static function insert(array &$user): bool
   {
     $query = self::db()->prepare(<<<SQL
         INSERT INTO users (fullname, password, email)
-        VALUES (:fullname, :password, :email);
+        VALUES (:fullname, :password, :email)
+        RETURNING id;
       SQL);
 
     $query->bindValue(':fullname', $user['fullname']);
     $query->bindValue(':password', $user['password']);
     $query->bindValue(':email', $user['email']);
 
-    return $query->execute();
+    $result = $query->execute();
+
+    if ($result) {
+      $user['id'] = $query->fetchColumn();
+    } else {
+      return false;
+    }
+
+    return true;
   }
 
-  public static function insert_changeset(array $user): array
+  public static function insert_changeset(array &$user): array
   {
     $changeset_errors = [];
 
@@ -40,12 +49,16 @@ class UserRepository extends Repository
     }
 
     if (empty($user['email'])) {
-      $changeset_errors['email'] = _('E-mail obrigatória.');
+      $changeset_errors['email'] = _('E-mail obrigatório.');
     }
 
     if (empty($user['password'])) {
       $changeset_errors['password'] = _('Senha obrigatória.');
+    } elseif (mb_strlen($user['password'] < 12)) {
+      $changeset_errors['password'] = _('A senha deve ter no mínimo 12 caracteres.');
     }
+
+    $user['password'] = password_hash($user['password'], PASSWORD_DEFAULT);
 
     return $changeset_errors;
   }

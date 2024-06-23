@@ -18,6 +18,7 @@ class Router
   {
     foreach ($routes as $route) {
       $route['path'] = $path . $route['path'];
+      $route['path'] = str_replace('//', '/', $route['path']);
       $route['guard'] = null;
 
       if ($guard !== null) {
@@ -65,17 +66,19 @@ class Router
 
     $path = $current_uri[0];
 
-    if (empty($action = self::$routes[$current_method][$path])) {
-      $action = self::$on[404];
+    if (empty(self::$routes[$current_method][$path])) {
+      $action = self::$on[404] ?? http_response_code(404) && exit;
+    } else {
+      $action = self::$routes[$current_method][$path];
     }
 
     if (is_array($action)) {
       $guard = $action['guard'];
       $action = $action['action'];
 
-      $guard = self::$guards[$guard];
+      $guard = self::$guards[$guard] ?? null;
 
-      if ($guard['condition']()) {
+      if (!empty($guard['condition']) && $guard['condition']()) {
         $guard['on_guard']();
       }
     }

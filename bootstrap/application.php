@@ -11,6 +11,7 @@
  */
 
 include __DIR__ . '/constants.php';
+include __DIR__ . '/functions.php';
 
 foreach (glob(ROUTESDIR . '/*.php') as $router_file) {
   include $router_file;

@@ -16,17 +16,43 @@ class Session
     self::$started = true;
   }
 
+  const SESSION_NAME = 'site_session';
+
   public static function set(string $key, mixed $value): void
   {
     self::start();
 
-    $_SESSION['SITE_SESSION'][$key] = $value;
+    $_SESSION[self::SESSION_NAME][$key] = $value;
   }
 
   public static function get(string $key): mixed
   {
     self::start();
 
-    return $_SESSION['SITE_SESSION'][$key] ?? null;
+    return $_SESSION[self::SESSION_NAME][$key] ?? null;
+  }
+
+  public static function destroy(): void
+  {
+    self::start();
+
+    session_destroy();
+  }
+
+  const CURRENT_USER_SESSION_NAME = 'current_user';
+
+  public static function set_user(array $user): void
+  {
+    self::set(self::CURRENT_USER_SESSION_NAME, $user);
+  }
+
+  public static function get_user(): ?array
+  {
+    return self::get(self::CURRENT_USER_SESSION_NAME);
+  }
+
+  public static function user_is_logged(): bool
+  {
+    return !empty(self::get_user());
   }
 }
