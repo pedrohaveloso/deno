@@ -1,74 +1,202 @@
 <?
 
-if (empty($argv[1])) {
-  return;
-}
-
 include __DIR__ . '/../../bootstrap/constants.php';
 include __DIR__ . '/../vendor/autoload.php';
 
-function db(string $name = 'primary'): PDO
+class Migrator
 {
-  return App\Core\Database::get($name);
-}
+  private $migrated = [];
 
-switch ($argv[1]) {
-  case 'migrate':
-    migrate();
-    break;
-}
-
-function migration_id($migration_name)
-{
-  return substr($migration_name, 0, 14);
-}
-
-
-function migrate()
-{
-  $files = glob(MIGRATIONSDIR . '/*.php');
-
-  $migrations = array_map(function ($file) {
-    $migration = include $file;
-
-    if (empty($migration['up']) || empty($migration['down'])) {
-      throw new Exception('');
+  private function get_migrated_file(): array
+  {
+    if (!file_exists(CACHEDIR . '/migrator')) {
+      mkdir(CACHEDIR . '/migrator', 0777, true);
     }
 
-    $migration['name'] = explode('/', $file);
-    $migration['name'] = end($migration['name']);
+    $migrated_file = CACHEDIR . '/migrator/migrated.json';
 
-    return $migration;
-  }, $files);
-
-  array_map(function ($migration) {
-    $control = json_decode(file_get_contents(__DIR__ . '/migrations/control.json'));
-
-    if (empty($control)) {
-      $control = [];
+    if (!file_exists($migrated_file)) {
+      fopen($migrated_file, 'x');
     }
 
-    if (in_array(migration_id($migration['name']), $control)) {
+    $migrated = file_get_contents($migrated_file) ?? [];
+    $migrated = json_decode($migrated) ?? [];
+
+    return $migrated;
+  }
+
+  private function save_migrated_file(): void
+  {
+    $migrated_file = CACHEDIR . '/migrator/migrated.json';
+
+    file_put_contents(
+      $migrated_file,
+      json_encode($this->migrated),
+    );
+  }
+
+  public function start(array $arguments): void
+  {
+    if (empty($arguments[1])) {
       return;
     }
 
-    echo str_repeat('-', 50) . PHP_EOL;
-    echo 'Migrating: ' . $migration['name'] . PHP_EOL;
-
-    try {
-      $migration['up']();
-
-      $control[] = migration_id($migration['name']);
-      file_put_contents(__DIR__ . '/migrations/control.json', json_encode($control));
-
-    } catch (Exception $exception) {
-      echo 'Error: ' . PHP_EOL;
-      echo $exception->getMessage();
-      echo PHP_EOL;
-      exit;
+    if (!empty($arguments[2]) && !ctype_digit($arguments[2])) {
+      throw new Exception('Quantidade ' . $arguments[2] . ' inválida.');
     }
 
-  }, $migrations);
+    $this->migrated = $this->get_migrated_file();
+
+    if (!empty($arguments[2])) {
+      $number = $arguments[2];
+    } else {
+      $number = null;
+    }
+
+    $options = [
+      'up' => fn($number) => $this->up($number),
+      'down' => fn($number) => $this->down($number),
+    ];
+
+    ($options[$arguments[1]] ?? fn($_) => $this->invalid_option())($number);
+
+    $this->save_migrated_file();
+
+    App\Core\Database::close_all();
+  }
+
+  private function invalid_option(): void
+  {
+    echo 'Opção inválida' . PHP_EOL;
+  }
+
+  private function migration_name(string $filename): string
+  {
+    $filename_arr = explode('/', $filename);
+    $last = end($filename_arr);
+
+    return $last;
+  }
+
+  private function migration_datetime(string $migration_name): int
+  {
+    $datetime = substr($migration_name, 0, 14);
+
+    if (ctype_digit($datetime)) {
+      return (int) $datetime;
+    }
+
+    throw new Exception('Migração com data (nome) inválida.');
+  }
+
+  private function up(?int $number = null): void
+  {
+    $migrations = glob(MIGRATIONSDIR . '/*.php');
+
+    if (empty($migrations)) {
+      return;
+    }
+
+    $number = $number ?? count($migrations);
+    $count = 0;
+
+    foreach ($migrations as $migration) {
+      $name = $this->migration_name($migration);
+      $date = $this->migration_datetime($name);
+
+      if (in_array($date, $this->migrated)) {
+        continue;
+      }
+
+      if ($count >= $number) {
+        continue;
+      }
+
+      $this->up_migration($migration, $name);
+
+      $this->migrated[] = $date;
+
+      $count++;
+    }
+  }
+
+  private function down(?int $number = null): void
+  {
+    $migrations = glob(MIGRATIONSDIR . '/*.php');
+
+    if (empty($migrations)) {
+      return;
+    }
+
+    $number = $number ?? count($migrations);
+    $count = 0;
+
+    $migrations = array_reverse($migrations);
+
+    foreach ($migrations as $migration) {
+      $name = $this->migration_name($migration);
+      $date = $this->migration_datetime($name);
+
+      if (!in_array($date, $this->migrated)) {
+        continue;
+      }
+
+      if ($count >= $number) {
+        continue;
+      }
+
+      $this->down_migration($migration, $name);
+
+      $key = array_search($date, $this->migrated);
+      unset($this->migrated[$key]);
+
+      $count++;
+    }
+  }
+
+  private function up_migration(string $file, string $name): void
+  {
+    echo str_repeat('-', 30) . PHP_EOL;
+    echo 'Migrando ' . $name . PHP_EOL;
+
+    $migration_arr = include $file;
+
+    if (empty($migration_arr['up']) || empty($migration_arr['down'])) {
+      throw new Exception(
+        'Migração inválida. Toda migração deve ter um \'up\' e um \'down\'.' . PHP_EOL
+      );
+    }
+
+    try {
+      $migration_arr['up']();
+    } catch (Exception $exception) {
+      throw new Exception(
+        'Erro ao migrar: ' . $exception->getMessage() . PHP_EOL
+      );
+    }
+  }
+
+  private function down_migration(string $file, string $name): void
+  {
+    echo str_repeat('-', 30) . PHP_EOL;
+    echo 'Voltando ' . $name . PHP_EOL;
+
+    $migration_arr = include $file;
+
+    if (empty($migration_arr['up']) || empty($migration_arr['down'])) {
+      throw new Exception(
+        'Migração inválida. Toda migração deve ter um \'up\' e um \'down\'.' . PHP_EOL
+      );
+    }
+
+    try {
+      $migration_arr['down']();
+    } catch (Exception $exception) {
+      throw new Exception(
+        'Erro ao voltar: ' . $exception->getMessage() . PHP_EOL
+      );
+    }
+  }
 }
 
-App\Core\Database::close_all();
+(new Migrator())->start($argv);

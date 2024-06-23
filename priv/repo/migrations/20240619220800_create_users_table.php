@@ -1,8 +1,10 @@
 <?
 
+use App\Core\Database;
+
 return [
   'up' => function () {
-    db()->query(<<<SQL
+    Database::get()->query(<<<SQL
       CREATE TABLE IF NOT EXISTS users (
         id         UUID PRIMARY KEY DEFAULT gen_random_uuid(),
         fullname   VARCHAR(255),
@@ -15,7 +17,7 @@ return [
   },
 
   'down' => function () {
-    db()->query(<<<SQL
+    Database::get()->query(<<<SQL
       DROP TABLE IF EXISTS users;
     SQL);
   }

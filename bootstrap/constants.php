@@ -12,6 +12,7 @@ const ROUTESDIR = PROJECTDIR . '/routes/';
 
 const PRIVDIR = PROJECTDIR . '/priv/';
 const CONFIGDIR = PRIVDIR . '/config/';
+const CACHEDIR = PRIVDIR . '/cache/';
 const REPODIR = PRIVDIR . '/repo/';
 const MIGRATIONSDIR = REPODIR . '/migrations/';
 
