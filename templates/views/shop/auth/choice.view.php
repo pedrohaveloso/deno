@@ -1,6 +1,25 @@
-<main>
-  <a href="/auth/login">login</a>
-  <a href="/auth/register">register</a>
+<main class="text-center flex flex-col flex-grow justify-center items-center gap-6 py-16 p-4">
+  <h1 class="text-3xl sm:text-4xl font-bold">
+    <?= ('Você não está logado') ?>
+  </h1>
+
+  <p class="sm:text-xl max-w-[700px]">
+    <?= ('Para prosseguir com suas compras em nosso site, crie uma conta ou entre com a sua.') ?>
+  </p>
+
+  <div class="flex flex-col sm:flex-row gap-4 sm:gap-2 mt-6 text-lg w-full sm:w-fit">
+    <a href="/auth/login">
+      <_buttons.secondary type="submit" class="w-full sm:w-fit h-12 px-14">
+        <?= ('Entrar') ?>
+      </_buttons.secondary>
+    </a>
+
+    <a href="/auth/register">
+      <_buttons.primary type="submit" class="w-full sm:w-fit h-12 px-14">
+        <?= ('Cadastrar-se') ?>
+      </_buttons.primary>
+    </a>
+  </div>
 </main>
 
 <_footer></_footer>
