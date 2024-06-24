@@ -1,5 +1,18 @@
 FROM php:8.3-fpm
 
 RUN apt-get update && \
-  apt-get install -y libpq-dev curl && \
+  apt-get install -y libpq-dev curl git unzip && \
   docker-php-ext-install pdo pdo_pgsql gettext
+
+COPY --from=composer /usr/bin/composer /usr/bin/composer
+
+WORKDIR /deno/priv
+
+COPY ./priv/composer.json ./priv/composer.lock ./
+
+ENV COMPOSER_ALLOW_SUPERUSER=1
+
+RUN composer install --no-scripts --no-autoloader --prefer-dist && \
+  composer dump-autoload --optimize
+
+CMD ["php-fpm"]

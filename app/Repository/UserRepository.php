@@ -7,7 +7,7 @@ class UserRepository extends Repository
   public static function get_by_email(string $email): array|null
   {
     $query = self::db()->prepare(<<<SQL
-      SELECT * FROM users WHERE email = :email;
+      SELECT * FROM "User" WHERE "email" = :email;
     SQL);
 
     $query->bindValue(':email', $email);
@@ -20,9 +20,9 @@ class UserRepository extends Repository
   public static function insert(array &$user): bool
   {
     $query = self::db()->prepare(<<<SQL
-        INSERT INTO users (fullname, password, email)
+        INSERT INTO "User" ("fullname", "password", "email")
         VALUES (:fullname, :password, :email)
-        RETURNING id;
+        RETURNING "id";
       SQL);
 
     $query->bindValue(':fullname', $user['fullname']);

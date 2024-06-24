@@ -205,7 +205,7 @@ class Migrator
     }
 
     try {
-      $migration_arr['up']();
+      $migration_arr['up'](new App\Core\Database());
     } catch (Exception $exception) {
       throw new Exception(
         'Erro ao migrar: ' . $exception->getMessage() . PHP_EOL
@@ -227,7 +227,7 @@ class Migrator
     }
 
     try {
-      $migration_arr['down']();
+      $migration_arr['down'](new App\Core\Database());
     } catch (Exception $exception) {
       throw new Exception(
         'Erro ao voltar: ' . $exception->getMessage() . PHP_EOL
@@ -236,7 +236,7 @@ class Migrator
   }
 }
 
-include __DIR__ . '/../../bootstrap/constants.php';
-include __DIR__ . '/../vendor/autoload.php';
+include __DIR__ . '/../bootstrap/constants.php';
+include __DIR__ . '/../priv/vendor/autoload.php';
 
 (new Migrator())->start($argv);

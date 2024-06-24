@@ -1,7 +1,9 @@
+version: '3.8'
+
 services:
-  web:
+  deno-nginx:
     image: nginx:latest
-    container_name: nginx
+    container_name: deno-nginx
     restart: always
     ports:
       - "1010:80"
@@ -9,31 +11,40 @@ services:
       - ./:/deno
       - ./config/nginx.conf:/etc/nginx/conf.d/default.conf
     links:
-      - php
+      - deno-phpfpm
 
-  php:
+  deno-phpfpm:
     build:
       context: .
       dockerfile: dockerfile.phpfpm
-    container_name: php
+    container_name: deno-phpfpm
     volumes:
       - ./:/deno
+      - ./priv/vendor:/deno/priv/vendor
     expose:
       - 9000
 
-  tailwind:
+  deno-tailwind:
     build:
       context: .
       dockerfile: dockerfile.tailwind
-    container_name: tailwind
+    container_name: deno-tailwind
     stdin_open: true
     tty: true
     volumes:
       - ./:/deno
 
-  db:
+  deno-composer:
+    build:
+      context: .
+      dockerfile: dockerfile.composer
+    container_name: deno-composer
+    volumes:
+      - ./:/deno
+
+  deno-db:
     image: postgres
-    container_name: db
+    container_name: deno-db
     restart: always
     environment:
       POSTGRES_PASSWORD: dev
@@ -44,9 +55,9 @@ services:
     ports:
       - 1111:5432
 
-  adminer:
+  deno-adminer:
     image: adminer
-    container_name: adminer
+    container_name: deno-adminer
     restart: always
     ports:
       - 1212:8080
