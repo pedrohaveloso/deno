@@ -13,12 +13,13 @@ services:
 
   php:
     build: .
-    container_name: php-fpm
+    container_name: php
     volumes:
       - ./:/www
 
   db:
     image: postgres
+    container_name: db
     restart: always
     environment:
       POSTGRES_PASSWORD: dev
@@ -31,6 +32,7 @@ services:
 
   adminer:
     image: adminer
+    container_name: adminer
     restart: always
     ports:
       - 1212:8080

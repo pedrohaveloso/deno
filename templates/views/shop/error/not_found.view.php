@@ -1,4 +1,4 @@
-<main class="text-center flex flex-col flex-grow justify-center items-center gap-6 p-4">
+<main class="text-center flex flex-col flex-grow justify-center items-center gap-6 py-16 p-4">
   <h1 class="text-3xl sm:text-4xl font-bold">
     Página não encontrada
   </h1>
@@ -21,3 +21,5 @@
     </a>
   </div>
 </main>
+
+<_footer></_footer>

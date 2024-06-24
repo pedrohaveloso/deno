@@ -7,7 +7,8 @@ $current_page = $attributes['current-page'] ?? '';
 $search_element = function (string $responsive) {
   ?>
   <search class="<?= $responsive ?> h-10 max-w-64 bg-indigo-100 rounded-2xl">
-    <input type="text" placeholder="<?= _('Pesquisar...') ?>" class="w-full h-full bg-transparent ps-4 outline-none">
+    <input type="text" name="search" placeholder="<?= _('Pesquisar...') ?>"
+      class="w-full h-full bg-transparent ps-4 outline-none">
 
     <button aria-label="<?= _('Pesquisar') ?>" class="pe-4">
       <_icon name="search"></_icon>
@@ -47,7 +48,7 @@ $menu_options_element = function () use ($current_page, $search_element) {
 
 ?>
 
-<nav x-data="{ open: false }" class="w-screen flex flex-col p-4 sm:px-8 bg-indigo-50 gap-4">
+<nav x-data="{ open: false }" class="flex flex-col p-4 sm:px-8 bg-indigo-50 gap-4">
   <div class="flex justify-between">
     <section class="flex gap-2 items-center">
       <a href="/" aria-label="<?= _('Página inicial') ?>" class="mr-4">
