@@ -6,16 +6,30 @@ services:
     ports:
       - "1010:80"
     volumes:
-      - ./:/www
-      - ./priv/config/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./:/deno
+      - ./config/nginx.conf:/etc/nginx/conf.d/default.conf
     links:
       - php
 
   php:
-    build: .
+    build:
+      context: .
+      dockerfile: dockerfile.phpfpm
     container_name: php
     volumes:
-      - ./:/www
+      - ./:/deno
+    expose:
+      - 9000
+
+  tailwind:
+    build:
+      context: .
+      dockerfile: dockerfile.tailwind
+    container_name: tailwind
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./:/deno
 
   db:
     image: postgres
@@ -26,7 +40,7 @@ services:
       POSTGRES_DB: deno_dev
     volumes:
       - ./priv/cache/docker/postgresql:/var/lib/postgresql/data
-      - ./priv/repo/database.sql:/docker-entrypoint-initdb.d/create_database.sql
+      - ./repo/database.sql:/docker-entrypoint-initdb.d/create_database.sql
     ports:
       - 1111:5432
 

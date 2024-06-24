@@ -1,0 +1,7 @@
+FROM node:16
+
+COPY . /deno
+
+WORKDIR /deno/priv
+
+CMD npm install && npx tailwindcss -i /deno/public/assets/styles/input.css -o /deno/public/assets/styles/output.css --watch

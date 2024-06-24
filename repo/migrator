@@ -14,7 +14,7 @@
  * 
  * Você entrará no container do PHP. Agora, para utilizar o migrator, faça:
  * 
- * php /www/priv/repo/migrator [OPÇÃO]
+ * php /deno/repo/migrator [OPÇÃO]
  * 
  * As opções disponíveis são:
  * 
@@ -26,9 +26,9 @@
  * 
  * ### Exemplos:
  * 
- * php /www/priv/repo/migrator up 1
- * php /www/priv/repo/migrator up 5
- * php /www/priv/repo/migrator up
+ * php /deno/repo/migrator up 1
+ * php /deno/repo/migrator up 5
+ * php /deno/repo/migrator up
  * 
  * ## down ?[(int > 0) $number]:
  * 
@@ -38,9 +38,9 @@
  * 
  * ### Exemplos:
  * 
- * php /www/priv/repo/migrator down 1
- * php /www/priv/repo/migrator down 5
- * php /www/priv/repo/migrator down
+ * php /deno/repo/migrator down 1
+ * php /deno/repo/migrator down 5
+ * php /deno/repo/migrator down
  * -----------------------------------------------------------------------------
  */
 class Migrator

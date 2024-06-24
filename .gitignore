@@ -1,3 +1,4 @@
 .vscode
 priv/vendor
 priv/cache
+priv/node_modules

@@ -5,10 +5,9 @@ use App\Core\Session;
 use App\Core\HTTP\Response;
 
 Router::group('/', routes: [
-  Router::get('/destroy', function () {
-    Session::destroy();
-  }),
+  Router::get('/destroy', fn() => Session::destroy()),
 
+  Router::get('/', fn() => Response::redirect('/home')),
   Router::get('/home', 'home@index'),
   Router::get('/contact', 'home@contact')
 ]);
