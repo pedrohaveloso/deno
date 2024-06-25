@@ -7,16 +7,16 @@ use App\Repository\UserRepository;
 use App\Core\Session;
 use App\Core\HTTP\{HTMX, Request, View};
 
-class AuthController extends Controller
+class UserController extends Controller
 {
   public function choice()
   {
-    return View::render('shop/auth/choice', layout: 'shop');
+    return View::render('shop/user/choice', layout: 'shop');
   }
 
   public function login()
   {
-    return View::render('shop/auth/login', layout: 'shop');
+    return View::render('shop/user/login', layout: 'shop');
   }
 
   public function login_post()
@@ -45,7 +45,7 @@ class AuthController extends Controller
 
   public function register()
   {
-    return View::render('shop/auth/register', layout: 'shop');
+    return View::render('shop/user/register', layout: 'shop');
   }
 
   public function register_post()

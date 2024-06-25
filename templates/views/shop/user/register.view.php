@@ -1,6 +1,6 @@
 <main class="flex p-2 w-screen flex-grow">
   <div class="flex-grow grid place-items-center">
-    <form hx-post="/auth/register" hx-trigger="submit" hx-target="#error"
+    <form hx-post="/user/register" hx-trigger="submit" hx-target="#error"
       class="max-w-[500px] w-full p-2 sm:p-6 flex flex-col items-center justify-center gap-8 h-full">
       <h2 class="text-3xl font-medium text-indigo-800">
         <?= _('Criar conta') ?>
@@ -26,7 +26,7 @@
         <?= _('Cadastrar') ?>
       </_buttons.primary>
 
-      <a href="/auth/login">
+      <a href="/user/login">
         <?= _('Já possui uma conta?') ?> <strong><?= _('Entre') ?></strong>.
       </a>
     </form>

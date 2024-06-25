@@ -8,13 +8,13 @@
   </p>
 
   <div class="flex flex-col sm:flex-row gap-4 sm:gap-2 mt-6 text-lg w-full sm:w-fit">
-    <a href="/auth/login">
+    <a href="/user/login">
       <_buttons.secondary type="submit" class="w-full sm:w-fit h-12 px-14">
         <?= _('Entrar') ?>
       </_buttons.secondary>
     </a>
 
-    <a href="/auth/register">
+    <a href="/user/register">
       <_buttons.primary type="submit" class="w-full sm:w-fit h-12 px-14">
         <?= _('Cadastrar-se') ?>
       </_buttons.primary>

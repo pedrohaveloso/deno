@@ -4,27 +4,56 @@ use App\Core\Router;
 use App\Core\Session;
 use App\Core\HTTP\Response;
 
-Router::group('/', routes: [
-  Router::get('/destroy', fn() => Session::destroy()),
-
-  Router::get('/', fn() => Response::redirect('/home')),
-  Router::get('/home', 'home@index'),
-  Router::get('/contact', 'home@contact')
-]);
+Router::on(404, 'error@not_found');
 
 Router::group(
-  '/auth',
+  '/',
   routes: [
-    Router::get('/choice', 'auth@choice'),
+    Router::get('/', fn() => Response::redirect('/home')),
+    Router::get('/destroy', fn() => Session::destroy()),
 
-    Router::get('/login', 'auth@login'),
-    Router::post('/login', 'auth@login_post'),
+    Router::get('/home', 'home@index'),
+    Router::get('/contact', 'home@contact')
+  ]
+);
 
-    Router::get('/register', 'auth@register'),
-    Router::post('/register', 'auth@register_post'),
+Router::group(
+  '/',
+  routes: [
+    Router::get('/profile', 'user@profile'),
+  ],
+  guard: Router::guard(
+    fn() => !Session::user_is_logged(),
+    fn() => Response::redirect('/user/choice')
+  )
+);
+
+Router::group(
+  '/user',
+  routes: [
+    Router::get('/choice', 'user@choice'),
+
+    Router::get('/login', 'user@login'),
+    Router::post('/login', 'user@login_post'),
+
+    Router::get('/register', 'user@register'),
+    Router::post('/register', 'user@register_post'),
   ],
   guard: Router::guard(
     fn() => Session::user_is_logged(),
     fn() => Response::redirect('/')
   )
+);
+
+Router::group(
+  '/backoffice',
+  routes: [
+  ],
+);
+
+Router::group(
+  '/admin',
+  routes: [
+    Router::get('/login', 'admin@login'),
+  ]
 );

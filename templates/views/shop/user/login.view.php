@@ -14,7 +14,7 @@
   </div>
 
   <div class="flex-grow grid place-items-center">
-    <form hx-post="/auth/login" hx-trigger="submit" hx-target="#error"
+    <form hx-post="/user/login" hx-trigger="submit" hx-target="#error"
       class="max-w-[500px] w-full p-2 sm:p-6 flex flex-col items-center justify-center gap-8 h-full">
       <h2 class="text-3xl font-medium text-indigo-800">
         <?= _('Entre com sua conta') ?>
@@ -36,7 +36,7 @@
         <?= _('Entrar') ?>
       </_buttons.primary>
 
-      <a href="/auth/register">
+      <a href="/user/register">
         <?= _('Não possui uma conta?') ?> <strong><?= _('Cadastre-se') ?></strong>.
       </a>
     </form>
