@@ -1,6 +1,6 @@
 FROM composer
 
-COPY . ./deno
+COPY ../../../ ./deno
 
 WORKDIR /deno/priv
 

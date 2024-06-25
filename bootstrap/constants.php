@@ -9,13 +9,13 @@ const CONTROLLERDIR = APPDIR . '/controller/';
 
 const BOOTSTRAPDIR = PROJECTDIR . '/bootstrap/';
 const ROUTESDIR = PROJECTDIR . '/routes/';
-const CONFIGDIR = PROJECTDIR . '/config/';
 
 const REPODIR = PROJECTDIR . '/repo/';
 const MIGRATIONSDIR = REPODIR . '/migrations/';
 
 const PRIVDIR = PROJECTDIR . '/priv/';
 const CACHEDIR = PRIVDIR . '/cache/';
+const CONFIGDIR = PRIVDIR . '/config/';
 
 const TEMPLATESDIR = PROJECTDIR . '/templates/';
 const VIEWSDIR = TEMPLATESDIR . '/views/';

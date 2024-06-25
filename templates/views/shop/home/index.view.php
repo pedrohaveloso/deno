@@ -5,14 +5,12 @@
 
       <strong class="text-indigo-950">Deno</strong>,
 
-      <?= _('
-      sua parceira de confiança no setor industrial. 
+      <?= _('sua parceira de confiança no setor industrial. 
       Por décadas, temos nos dedicado a fornecer soluções inovadoras que 
-      capacitam empresas a se destacarem em seus respectivos campos.
-      ') ?>
+      capacitam empresas a se destacarem em seus respectivos campos.') ?>
     </p>
 
-    <img class="w-full sm:w-2/3 lg:w-1/3 h-full" loading="lazy" src="/public/assets/images/delivery_img.svg"
+    <img class="w-full sm:w-2/3 lg:w-1/3 h-full" src="/public/assets/images/delivery_img.svg"
       alt="<?= _('Imagem de entregador com uma encomenda') ?>">
   </section>
 

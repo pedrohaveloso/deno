@@ -20,24 +20,8 @@
 
   <link rel="shortcut icon" href="/public/assets/favicon.ico" type="image/x-icon">
 
+  <!-- Styles: -->
   <link href="/public/assets/styles/output.css" rel="stylesheet">
-
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-    * {
-      font-family: 'Poppins', 'Verdana', 'Helvetica', 'Arial';
-    }
-
-    input:-webkit-autofill,
-    input:-webkit-autofill:focus {
-      transition: background-color 600000s 0s, color 600000s 0s;
-    }
-
-    input[data-autocompleted] {
-      background-color: transparent !important;
-    }
-  </style>
 
   <title>
     Deno <?= isset($page_title) ? '|' . $page_title : '' ?>
@@ -47,6 +31,13 @@
 <body class="*:text-indigo-950 min-h-screen flex flex-col">
   <?= $inner_content ?>
 
+  <!-- AlpineJS script: -->
+  <script defer src="/public/assets/scripts/alpinejs/alpinejs-3.14.1.min.js"></script>
+
+  <!-- HTMX script: -->
+  <script defer src="/public/assets/scripts/htmx/htmx-2.0.0.min.js"></script>
+
+  <!-- VLibras widget: -->
   <div vw class="enabled">
     <div vw-access-button class="active"></div>
     <div vw-plugin-wrapper>
@@ -54,11 +45,8 @@
     </div>
   </div>
 
-  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
-  <script defer src="/public/assets/scripts/htmx/htmx-2.0.0.min.js"></script>
-
-  <script defer src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-
+  <!-- VLibras script: -->
+  <script defer src="/public/assets/scripts/vlibras/vlibras-6.0.0.min.js"></script>
   <script defer>
     document.addEventListener("DOMContentLoaded", () => {
       new window.VLibras.Widget('https://vlibras.gov.br/app');

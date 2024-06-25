@@ -1,7 +1,7 @@
 # Desenvolvimento
 
-npx tailwindcss -i ../public/assets/styles/input.css -o ../public/assets/styles/output.css --watch
+docker compose -f ./priv/docker/dev/docker-compose.yaml up -d 
 
-# Deploy:
+# Prod:
 
-npx tailwindcss -i ../public/assets/styles/input.css -o ../public/assets/styles/output.css --minify
+docker compose -f ./priv/docker/prod/docker-compose.yaml up -d 
