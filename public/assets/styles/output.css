@@ -946,6 +946,11 @@ video {
   font-family: 'Poppins', 'Verdana', 'Helvetica', 'Arial';
 }
 
+.text-error{
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity));
+}
+
 input:-webkit-autofill,
 input:-webkit-autofill:focus {
   -webkit-transition: background-color 600000s 0s, color 600000s 0s;

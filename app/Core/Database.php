@@ -3,7 +3,7 @@
 /**
  * -----------------------------------------------------------------------------
  * Realiza a conexão com os bancos de dados configurados no arquivo: 
- * CONFIGDIR/databases.json. A conexão é feita utilizando o PDO (PostgreSQL).
+ * CONFIGDIR/databases.php. A conexão é feita utilizando o PDO (PostgreSQL).
  * -----------------------------------------------------------------------------
  */
 
@@ -19,6 +19,11 @@ class Database
    */
   private static ?array $connections = [];
 
+  /**
+   * @var array 
+   */
+  private static ?array $databases_configs = [];
+
   public static function get(string $name = null): PDO
   {
     if ($name === null) {
@@ -29,29 +34,25 @@ class Database
       return self::$connections[$name];
     }
 
-    $databases_config_file = CONFIGDIR . '/databases.json';
+    if (empty(self::$databases_configs)) {
+      $databases_config_file = CONFIGDIR . '/databases.php';
 
-    if (!file_exists($databases_config_file . '/databases.json') === false) {
-      throw new Exception('Arquivo de configuração de banco de dados inexistente.');
+      if (!file_exists($databases_config_file . '/databases.php') === false) {
+        throw new Exception('Arquivo de configuração de banco de dados inexistente.');
+      }
+
+      self::$databases_configs = include $databases_config_file;
+
+      if (!is_array(self::$databases_configs)) {
+        throw new Exception('Erro ao incluir o arquivo de configuração.');
+      }
     }
 
-    $databases_config_file_content = file_get_contents($databases_config_file);
-
-    if (is_bool($databases_config_file_content)) {
-      throw new Exception('Erro ao ler o arquivo de configuração de banco de dados.');
-    }
-
-    $databases_configs = json_decode($databases_config_file_content, true);
-
-    if (!is_array($databases_configs)) {
-      throw new Exception('Erro ao decodificar o arquivo de configuração no formato JSON.');
-    }
-
-    if (empty($databases_configs[$name])) {
+    if (empty(self::$databases_configs[$name])) {
       throw new Exception('Conexão inexistente no arquivo.');
     }
 
-    $configs = $databases_configs[$name];
+    $configs = self::$databases_configs[$name];
 
     self::$connections[$name] = new PDO(
       'pgsql:host='

@@ -30,7 +30,7 @@ class UserController extends Controller
       || password_verify($user['password'], $db_user['password']) == false
     ) {
       ?>
-      <p class="text-red-500">
+      <p class="text-error">
         <?= _('E-mail ou senha inválido(s).') ?>
       </p>
       <?
@@ -54,7 +54,7 @@ class UserController extends Controller
 
     if (UserRepository::get_by_email($user['email']) != null) {
       ?>
-      <p class="text-red-500">
+      <p class="text-error">
         <?= _('E-mail já cadastrado.') ?>
       </p>
       <?
@@ -66,7 +66,7 @@ class UserController extends Controller
 
     if (!empty($errors)) {
       ?>
-      <p class="text-red-500">
+      <p class="text-error">
         <?
         echo join(array_map(function ($error) {
           return $error . '<br />';

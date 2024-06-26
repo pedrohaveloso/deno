@@ -10,7 +10,7 @@
  * Para utilizar o migrator, é necessário entrar no container do PHP, tente (com
  * o projeto rodando no docker e dentro da pasta raiz):
  * 
- * sudo docker exec -it php bash
+ * docker exec -it deno-phpfpm bash
  * 
  * Você entrará no container do PHP. Agora, para utilizar o migrator, faça:
  * 

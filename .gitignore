@@ -1,4 +1,7 @@
 .vscode
+
 priv/vendor
 priv/cache
 priv/node_modules
+
+priv/config/local.php

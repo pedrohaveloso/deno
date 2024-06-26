@@ -13,7 +13,8 @@ Router::group(
     Router::get('/destroy', fn() => Session::destroy()),
 
     Router::get('/home', 'home@index'),
-    Router::get('/contact', 'home@contact')
+    Router::get('/contact', 'home@contact'),
+    Router::get('/products', 'products@index')
   ]
 );
 

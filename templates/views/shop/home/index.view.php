@@ -1,4 +1,4 @@
-<main class="p-8 sm:p-12 flex flex-col gap-12">
+<main class="p-8 sm:p-12 flex flex-col gap-16">
   <section class="flex flex-col lg:flex-row flex-grow gap-16 items-center">
     <p class="w-full lg:w-2/3 text-xl lg:text-2xl xl:text-3xl text-gray-950">
       <?= _('Bem-vindo à') ?>
@@ -16,7 +16,7 @@
 
   <hr />
 
-  <section class="flex w-full flex-col gap-12 items-center">
+  <section class="flex w-full flex-col gap-16 items-center">
     <h2 class="font-bold text-xl sm:text-2xl text-center">
       <?= _('Nossos produtos:') ?>
     </h2>
