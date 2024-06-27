@@ -79,12 +79,4 @@ class Database
   {
     self::$connections = null;
   }
-
-  public static function timestamp(): string
-  {
-    return <<<SQL
-      "created_at" TIMESTAMP DEFAULT NOW(),
-      "updated_at" TIMESTAMP DEFAULT NOW()
-    SQL;
-  }
 }

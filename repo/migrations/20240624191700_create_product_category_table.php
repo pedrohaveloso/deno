@@ -1,10 +1,11 @@
 <?
 
-use App\Core\Database;
+namespace Repo\Migrations;
 
-return [
-  'up' => function (Database $db) {
-    $db::get()->query(<<<SQL
+return new class extends \Repo\Migration {
+  public function up()
+  {
+    $this->db()->query(<<<SQL
       CREATE TABLE IF NOT EXISTS "ProductCategory" (
         "id"          SERIAL PRIMARY KEY, 
         "product_id"  UUID,
@@ -13,14 +14,15 @@ return [
         FOREIGN KEY ("product_id") REFERENCES "Product" ("id"),
         FOREIGN KEY ("category_id") REFERENCES "Category" ("id"),
 
-        {$db::timestamp()}
+        {$this->timestamp()}
       );
     SQL);
-  },
+  }
 
-  'down' => function (Database $db) {
-    $db::get()->query(<<<SQL
+  public function down()
+  {
+    $this->db()->query(<<<SQL
       DROP TABLE IF EXISTS "ProductCategory";
     SQL);
   }
-];
+};

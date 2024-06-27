@@ -1,4 +1,4 @@
-<main class="text-center flex flex-col flex-grow justify-center items-center gap-6 py-16 p-4">
+<main class="text-center flex flex-col flex-grow justify-center items-center gap-6 py-16 p-4 mt-8">
   <h1 class="text-3xl sm:text-4xl font-bold">
     <?= _('Você não está logado') ?>
   </h1>
@@ -20,6 +20,12 @@
       </_buttons.primary>
     </a>
   </div>
+
+  <a href="/admin/login" class="mt-8">
+    <small>
+      É administrador? Entre aqui.
+    </small>
+  </a>
 </main>
 
 <_footer></_footer>

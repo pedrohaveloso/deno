@@ -1,10 +1,11 @@
 <?
 
-use App\Core\Database;
+namespace Repo\Migrations;
 
-return [
-  'up' => function (Database $db) {
-    $db::get()->query(<<<SQL
+return new class extends \Repo\Migration {
+  public function up()
+  {
+    $this->db()->query(<<<SQL
       CREATE TABLE IF NOT EXISTS "Product" (
         "id"             UUID PRIMARY KEY DEFAULT gen_random_uuid(),
         "name"           VARCHAR(155),
@@ -13,14 +14,15 @@ return [
         "in_stock"       INTEGER DEFAULT 0,
         "is_installment" BOOLEAN DEFAULT FALSE,
 
-        {$db::timestamp()}
+        {$this->timestamp()}
       );
     SQL);
-  },
+  }
 
-  'down' => function (Database $db) {
-    $db::get()->query(<<<SQL
+  public function down()
+  {
+    $this->db()->query(<<<SQL
       DROP TABLE IF EXISTS "Product";
     SQL);
   }
-];
+};

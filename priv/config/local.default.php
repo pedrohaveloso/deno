@@ -1,6 +1,3 @@
 <?
 
-return [
-  "environment" => "dev", // "dev"|"prod"
-  "show_errors" => false, // false|true
-];
+ini_set('display_errors', 0);

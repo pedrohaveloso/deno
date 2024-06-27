@@ -31,6 +31,8 @@
 <body class="*:text-indigo-950 min-h-screen flex flex-col">
   <?= $inner_content ?>
 
+  <script defer src="/public/assets/scripts/main.js"></script>
+
   <!-- AlpineJS script: -->
   <script defer src="/public/assets/scripts/alpinejs/alpinejs-3.14.1.min.js"></script>
 

@@ -10,6 +10,12 @@
  * -----------------------------------------------------------------------------
  */
 
+if (file_exists(__DIR__ . '/../priv/config/local.php')) {
+  include __DIR__ . '/../priv/config/local.php';
+} else {
+  include __DIR__ . '/../priv/config/local.default.php';
+}
+
 include __DIR__ . '/constants.php';
 include __DIR__ . '/functions.php';
 

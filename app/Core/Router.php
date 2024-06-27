@@ -2,9 +2,6 @@
 
 namespace App\Core;
 
-use Closure;
-use Exception;
-
 class Router
 {
   private static $routes = [];
@@ -34,7 +31,7 @@ class Router
     }
   }
 
-  public static function guard(Closure $condition, Closure $on_guard)
+  public static function guard(\Closure $condition, \Closure $on_guard)
   {
     return [
       'id' => self::$guard_counter++,
@@ -45,17 +42,17 @@ class Router
     ];
   }
 
-  public static function get(string $path, string|Closure $action)
+  public static function get(string $path, string|\Closure $action)
   {
     return ['method' => 'GET', 'path' => $path, 'action' => $action];
   }
 
-  public static function post(string $path, string|Closure $action)
+  public static function post(string $path, string|\Closure $action)
   {
     return ['method' => 'POST', 'path' => $path, 'action' => $action];
   }
 
-  public static function on(int $status_code, string|Closure $action)
+  public static function on(int $status_code, string|\Closure $action)
   {
     self::$on[$status_code] = $action;
   }
@@ -98,10 +95,9 @@ class Router
       }
 
       $action();
-    } catch (Exception $exception) {
-      if (Env::show_errors()) {
+    } catch (\Throwable | \Error | \Exception $exception) {
+      if (ini_get('display_errors') === 1) {
         var_dump($exception->getMessage());
-        exit;
       }
 
       (self::$on[500] ?? fn() => http_response_code(500) && exit )();
