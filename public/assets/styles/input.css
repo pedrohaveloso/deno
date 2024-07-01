@@ -20,3 +20,7 @@ input:-webkit-autofill:focus {
 input[data-autocompleted] {
   background-color: transparent !important;
 }
+
+button {
+  font-weight: 500;
+}

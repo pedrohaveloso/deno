@@ -55,4 +55,21 @@ class Session
   {
     return !empty(self::get_user());
   }
+
+  const CURRENT_ADMIN_SESSION_NAME = 'current_admin';
+
+  public static function set_admin(array $admin): void
+  {
+    self::set(self::CURRENT_ADMIN_SESSION_NAME, $admin);
+  }
+
+  public static function get_admin(): ?array
+  {
+    return self::get(self::CURRENT_ADMIN_SESSION_NAME);
+  }
+
+  public static function admin_is_logged(): bool
+  {
+    return !empty(self::get_admin());
+  }
 }

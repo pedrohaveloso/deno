@@ -56,5 +56,6 @@ Router::group(
   '/admin',
   routes: [
     Router::get('/login', 'admin@login'),
+    Router::post('/login', 'admin@login_post'),
   ]
 );
