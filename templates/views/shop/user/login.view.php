@@ -1,4 +1,4 @@
-<main class="flex p-2 w-screen flex-grow">
+<main class="flex p-2 flex-grow min-h-[calc(100vh-70px)]">
   <div
     class="hidden md:flex *:text-indigo-50 gap-8 text-center min-h-fit p-16 max-w-[50%] relative flex-grow flex-col items-center justify-center rounded-xl">
     <h2 class="text-4xl lg:text-5xl xl:text-6xl z-50">

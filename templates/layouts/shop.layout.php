@@ -3,3 +3,5 @@
 </header>
 
 <?= $inner_content ?>
+
+<_footer></_footer>

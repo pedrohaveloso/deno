@@ -27,5 +27,3 @@
     </small>
   </a>
 </main>
-
-<_footer></_footer>

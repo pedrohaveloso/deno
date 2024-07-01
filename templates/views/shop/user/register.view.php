@@ -1,4 +1,4 @@
-<main class="flex p-2 w-screen flex-grow">
+<main class="flex p-2 flex-grow min-h-[calc(100vh-70px)]">
   <div class="flex-grow grid place-items-center">
     <form hx-post="/user/register" hx-trigger="submit" hx-target="#error"
       class="max-w-[500px] w-full p-2 sm:p-6 flex flex-col items-center justify-center gap-8 h-full">

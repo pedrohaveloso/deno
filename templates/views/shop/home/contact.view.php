@@ -50,5 +50,3 @@
     </form>
   </section>
 </main>
-
-<_footer></_footer>
