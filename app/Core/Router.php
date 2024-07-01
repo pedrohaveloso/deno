@@ -17,6 +17,11 @@ class Router
     foreach ($routes as $route) {
       $route['path'] = $path . $route['path'];
       $route['path'] = str_replace('//', '/', $route['path']);
+
+      if (mb_substr($route['path'], -1) == '/') {
+        $route['path'] = mb_substr($route['path'], 0, -1);
+      }
+
       $route['guard'] = null;
 
       if ($guard !== null) {
