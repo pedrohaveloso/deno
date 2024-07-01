@@ -4,8 +4,6 @@ use App\Core\Router;
 use App\Core\Session;
 use App\Core\HTTP\Response;
 
-Router::on(404, 'error@not_found');
-
 Router::group(
   '/',
   routes: [
@@ -44,18 +42,4 @@ Router::group(
     fn() => Session::user_is_logged(),
     fn() => Response::redirect('/')
   )
-);
-
-Router::group(
-  '/backoffice',
-  routes: [
-  ],
-);
-
-Router::group(
-  '/admin',
-  routes: [
-    Router::get('/login', 'admin@login'),
-    Router::post('/login', 'admin@login_post'),
-  ]
 );
