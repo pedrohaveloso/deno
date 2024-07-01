@@ -2,17 +2,19 @@
 
 namespace App\Controller;
 
-use App\Core\HTTP\HTMX;
-use App\Core\HTTP\Request;
-use App\Core\HTTP\View;
 use App\Core\Session;
+use App\Core\HTTP\{HTMX, Request, View};
+
 use App\Repository\AdminRepository;
 
 class AdminController extends Controller
 {
   public function login()
   {
-    return View::render('backoffice/admin/login');
+    return View::render(
+      'backoffice/admin/login',
+      page_title: 'Entrar'
+    );
   }
 
   public function login_post()

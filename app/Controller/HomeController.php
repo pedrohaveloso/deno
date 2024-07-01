@@ -8,7 +8,12 @@ class HomeController extends Controller
 {
   public function index()
   {
-    return View::render('shop/home/index', layout: 'shop', current_page: 'home');
+    return View::render(
+      'shop/home/index',
+      layout: 'shop',
+      current_page: 'home',
+      page_title: _('Início')
+    );
   }
 
   public function contact()
@@ -32,6 +37,7 @@ class HomeController extends Controller
       'shop/home/contact',
       layout: 'shop',
       current_page: 'contact',
+      page_title: _('Atendimento'),
       topics: $topics,
       questions: $questions
     );

@@ -1,4 +1,4 @@
-<header class="p-4">
+<header class="p-4 fixed">
   <a href="/user/choice">
     <_buttons.primary class="py-2 px-4">
       <?= _('Voltar') ?>
@@ -6,7 +6,7 @@
   </a>
 </header>
 
-<main class="flex-grow flex-col flex items-center justify-center">
+<main class="flex-grow flex-col flex items-center justify-center p-2">
   <form hx-post="/admin/login" hx-trigger="submit" hx-target="#error" class="flex flex-col gap-8">
     <h1 class="text-center mb-4">
       <strong class="text-3xl">Deno</strong>

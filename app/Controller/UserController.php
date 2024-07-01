@@ -11,12 +11,19 @@ class UserController extends Controller
 {
   public function choice()
   {
-    return View::render('shop/user/choice', layout: 'shop');
+    return View::render(
+      'shop/user/choice',
+      layout: 'shop',
+    );
   }
 
   public function login()
   {
-    return View::render('shop/user/login', layout: 'shop');
+    return View::render(
+      'shop/user/login',
+      layout: 'shop',
+      page_title: _('Entrar'),
+    );
   }
 
   public function login_post()
@@ -45,7 +52,11 @@ class UserController extends Controller
 
   public function register()
   {
-    return View::render('shop/user/register', layout: 'shop');
+    return View::render(
+      'shop/user/register',
+      layout: 'shop',
+      page_title: _('Registrar-se'),
+    );
   }
 
   public function register_post()
