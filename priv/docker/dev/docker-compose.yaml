@@ -1,4 +1,15 @@
 services:
+  deno-phpfpm:
+    build:
+      context: .
+      dockerfile: dockerfile.phpfpm
+    container_name: deno-phpfpm
+    volumes:
+      - ../../../:/deno
+      - ../../../priv/vendor:/deno/priv/vendor
+    expose:
+      - 9000
+
   deno-nginx:
     image: nginx:latest
     container_name: deno-nginx
@@ -10,17 +21,6 @@ services:
       - ../../config/nginx.conf:/etc/nginx/conf.d/default.conf
     links:
       - deno-phpfpm
-
-  deno-phpfpm:
-    build:
-      context: .
-      dockerfile: dockerfile.phpfpm
-    container_name: deno-phpfpm
-    volumes:
-      - ../../../:/deno
-      - ../../../priv/vendor:/deno/priv/vendor
-    expose:
-      - 9000
 
   deno-tailwind:
     build:

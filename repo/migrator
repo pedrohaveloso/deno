@@ -76,7 +76,7 @@ class Migrator
   }
 
   public function start(array $arguments): void
-  {
+  {    
     if (!empty($arguments[2]) && !ctype_digit($arguments[2])) {
       throw new Exception('Quantidade ' . $arguments[2] . ' inválida.');
     }

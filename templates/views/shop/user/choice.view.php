@@ -21,7 +21,7 @@
     </a>
   </div>
 
-  <a href="/admin/login" class="mt-8">
+  <a href="/admin/login">
     <small>
       É administrador? Entre aqui.
     </small>
