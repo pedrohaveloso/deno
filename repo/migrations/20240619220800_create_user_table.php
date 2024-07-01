@@ -10,7 +10,7 @@ return new class extends \Repo\Migration {
         "id"         UUID PRIMARY KEY DEFAULT gen_random_uuid(),
         "fullname"   VARCHAR(255),
         "password"   VARCHAR(255),
-        "email"      VARCHAR(255),
+        "email"      VARCHAR(255) UNIQUE,
 
         {$this->timestamp()}
       );
