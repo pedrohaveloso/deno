@@ -32,6 +32,13 @@ class Session
     return $_SESSION[self::SESSION_NAME][$key] ?? null;
   }
 
+  public static function unset(string $key): void
+  {
+    self::start();
+
+    unset($_SESSION[self::SESSION_NAME][$key]);
+  }
+
   public static function destroy(): void
   {
     self::start();
@@ -71,5 +78,10 @@ class Session
   public static function admin_is_logged(): bool
   {
     return !empty(self::get_admin());
+  }
+
+  public static function unset_admin(): void
+  {
+    self::unset(self::CURRENT_ADMIN_SESSION_NAME);
   }
 }
