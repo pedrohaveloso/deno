@@ -8,6 +8,9 @@ class BackofficeController extends Controller
 {
   public function index()
   {
-    return View::render('backoffice/index');
+    return View::render(
+      'backoffice/index',
+      layout: 'backoffice'
+    );
   }
 }

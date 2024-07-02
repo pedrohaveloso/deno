@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Core\Session;
-use App\Core\HTTP\{HTMX, Request, View};
+use App\Core\HTTP\{HTMX, Request, View, Response};
 
 use App\Repository\AdminRepository;
 
@@ -39,5 +39,12 @@ class AdminController extends Controller
     Session::set_admin($db_admin);
 
     return HTMX::redirect('/backoffice');
+  }
+
+  public function logoff()
+  {
+    Session::unset_admin();
+
+    return Response::redirect('/backoffice');
   }
 }
