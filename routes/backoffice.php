@@ -1,13 +1,23 @@
 <?
 
-use App\Core\Router;
-use App\Core\Session;
+use App\Core\{Router, Session};
 use App\Core\HTTP\Response;
 
 Router::group(
   '/backoffice',
   routes: [
     Router::get('/', 'backoffice@index'),
+  ],
+  guard: Router::guard(
+    fn() => !Session::admin_is_logged(),
+    fn() => Response::redirect('/admin/login')
+  )
+);
+
+Router::group(
+  '/admin',
+  routes: [
+    Router::get('/logoff', 'admin@logoff'),
   ],
 );
 
