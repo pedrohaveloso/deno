@@ -19,5 +19,6 @@ const CONFIGDIR = PRIVDIR . '/config/';
 
 const TEMPLATESDIR = PROJECTDIR . '/templates/';
 const VIEWSDIR = TEMPLATESDIR . '/views/';
-const COMPONENTSDIR = TEMPLATESDIR . '/components/';
+const FRAGMENTSDIR = TEMPLATESDIR . '/fragments/';
 const LAYOUTSDIR = TEMPLATESDIR . '/layouts/';
+const BRICKSDIR = TEMPLATESDIR . '/bricks/';

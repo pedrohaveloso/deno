@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Repository\UserRepository;
 
 use App\Core\Session;
-use App\Core\HTTP\{HTMX, Request, View};
+use App\Web\{Brick, Request, View};
 
 class UserController extends Controller
 {
@@ -36,18 +36,12 @@ class UserController extends Controller
       empty($db_user)
       || password_verify($user['password'], $db_user['password']) == false
     ) {
-      ?>
-      <p class="text-error">
-        <?= _('E-mail ou senha inválido(s).') ?>
-      </p>
-      <?
-
-      return HTMX::response();
+      return Brick::render('user/login/invalid_credentials');
     }
 
     Session::set_user($db_user);
 
-    return HTMX::redirect('/home');
+    return Brick::redirect('/home');
   }
 
   public function register()
@@ -64,35 +58,19 @@ class UserController extends Controller
     $user = Request::post_data();
 
     if (UserRepository::get_by_email($user['email']) != null) {
-      ?>
-      <p class="text-error">
-        <?= _('E-mail já cadastrado.') ?>
-      </p>
-      <?
-
-      return HTMX::response();
+      return Brick::render('user/register/already_exists');
     }
 
     $errors = UserRepository::insert_changeset($user);
 
     if (!empty($errors)) {
-      ?>
-      <p class="text-error">
-        <?
-        echo join(array_map(function ($error) {
-          return $error . '<br />';
-        }, $errors));
-        ?>
-      </p>
-      <?
-
-      return HTMX::response();
+      return Brick::render('user/register/changeset_errors', errors: $errors);
     }
 
     UserRepository::insert($user);
 
     Session::set_user($user);
 
-    return HTMX::redirect('/home');
+    return Brick::redirect('/home');
   }
 }

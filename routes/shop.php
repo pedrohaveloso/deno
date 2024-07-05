@@ -2,7 +2,7 @@
 
 use App\Core\Router;
 use App\Core\Session;
-use App\Core\HTTP\Response;
+use App\Web\Response;
 
 Router::group(
   '/',

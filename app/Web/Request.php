@@ -1,8 +1,8 @@
 <?
 
-namespace App\Core\HTTP;
+namespace App\Web;
 
-class Request
+final class Request
 {
   public static function post_data(): array
   {

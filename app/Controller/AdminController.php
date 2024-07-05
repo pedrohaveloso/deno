@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Core\Session;
-use App\Core\HTTP\{HTMX, Request, View, Response};
+use App\Web\{Brick, Request, View, Response};
 
 use App\Repository\AdminRepository;
 
@@ -27,18 +27,12 @@ class AdminController extends Controller
       empty($db_admin)
       || password_verify($admin['password'], $db_admin['password']) == false
     ) {
-      ?>
-      <p class="text-error text-center">
-        <?= _('Nome de usuário ou senha inválido(s).') ?>
-      </p>
-      <?
-
-      return HTMX::response();
+      return Brick::render('admin/login/invalid_credentials');
     }
 
     Session::set_admin($db_admin);
 
-    return HTMX::redirect('/backoffice');
+    return Brick::redirect('/backoffice');
   }
 
   public function logoff()

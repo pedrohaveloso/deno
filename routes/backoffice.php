@@ -1,7 +1,7 @@
 <?
 
 use App\Core\{Router, Session};
-use App\Core\HTTP\Response;
+use App\Web\Response;
 
 Router::group(
   '/backoffice',

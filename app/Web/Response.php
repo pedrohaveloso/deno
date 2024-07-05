@@ -1,8 +1,8 @@
 <?
 
-namespace App\Core\HTTP;
+namespace App\Web;
 
-class Response
+final class Response
 {
   public static function redirect(string $to)
   {
