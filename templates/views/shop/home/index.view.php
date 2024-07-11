@@ -32,21 +32,21 @@
 
           <p class="text-end">10x de <strong class="text-lg">R$ 9999,99</strong></p>
 
-          <_buttons.accent class="w-full h-10">
+          <Button\Accent class="w-full h-10">
             <?= _('Adicionar') ?>
-          </_buttons.accent>
+          </Button\Accent>
 
-          <_buttons.secondary class="w-full h-10">
+          <Button\Secondary class="w-full h-10">
             <?= _('Ver detalhes') ?>
-          </_buttons.secondary>
+          </Button\Secondary>
         </article>
       <? endfor ?>
     </div>
 
     <a href="/products" class="w-full text-center">
-      <_buttons.primary class="w-full sm:max-w-96 h-14 text-xl">
+      <Button\Primary class="w-full sm:max-w-96 h-14 text-xl">
         <?= _('Ver mais produtos') ?>
-      </_buttons.primary>
+      </Button\Primary>
     </a>
   </section>
 </main>

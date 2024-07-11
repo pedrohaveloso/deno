@@ -1,7 +1,7 @@
 <header class="sticky top-0 z-50">
-  <_navbar current-page="<?= $current_page ?? '' ?>"></_navbar>
+  <Navbar current-page="<?= $current_page ?? '' ?>"></Navbar>
 </header>
 
-<?= $inner_content ?>
+<?= $content ?>
 
-<_footer></_footer>
+<Footer></Footer>

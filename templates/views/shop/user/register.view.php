@@ -7,24 +7,24 @@
       </h2>
 
       <div class="flex flex-col gap-4 w-full" id="form-inputs">
-        <_inputs.generic id="fullname" name="fullname" label="<?= _('Nome') ?>" required="true" icon="person"
+        <Input\Generic id="fullname" name="fullname" label="<?= _('Nome') ?>" required="true" icon="person"
           placeholder="João da Silva...">
-        </_inputs.generic>
+        </Input\Generic>
 
-        <_inputs.generic id="email" name="email" label="<?= _('E-mail') ?>" icon="contact" required="true" type="email"
+        <Input\Generic id="email" name="email" label="<?= _('E-mail') ?>" icon="contact" required="true" type="email"
           placeholder="joaosilva@email.com">
-        </_inputs.generic>
+        </Input\Generic>
 
-        <_inputs.generic id="password" name="password" minlength="12" label="<?= _('Senha') ?>" icon="key"
-          required="true" type="password" placeholder="************">
-        </_inputs.generic>
+        <Input\Generic id="password" name="password" minlength="12" label="<?= _('Senha') ?>" icon="key" required="true"
+          type="password" placeholder="************">
+        </Input\Generic>
       </div>
 
       <div id="error"></div>
 
-      <_buttons.primary type="submit" class="w-full h-12 sm:h-14">
+      <Button\Primary type="submit" class="w-full h-12 sm:h-14">
         <?= _('Cadastrar') ?>
-      </_buttons.primary>
+      </Button\Primary>
 
       <a href="/user/login">
         <?= _('Já possui uma conta?') ?> <strong><?= _('Entre') ?></strong>.

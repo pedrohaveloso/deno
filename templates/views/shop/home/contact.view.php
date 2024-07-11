@@ -11,9 +11,9 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
       <? foreach ($topics as $topic): ?>
         <a href="<?= $topic['slug'] ?>">
-          <_buttons.secondary class="w-full px-4 py-4 h-full font-medium">
+          <Button\Secondary class="w-full px-4 py-4 h-full font-medium">
             <?= $topic['title'] ?>
-          </_buttons.secondary>
+          </Button\Secondary>
         </a>
       <? endforeach; ?>
     </div>
@@ -27,7 +27,7 @@
     <div class="flex flex-col gap-2">
       <? foreach ($questions as $question): ?>
         <a href="<?= $question['slug'] ?>" class="flex gap-2">
-          <_icon name="contact"></_icon>
+          <Icon name="contact"></Icon>
           <?= $question['title'] ?>
         </a>
       <? endforeach; ?>
@@ -40,13 +40,13 @@
     </p>
 
     <form action="/" class="flex flex-col sm:flex-row gap-4 sm:gap-2 w-full">
-      <_inputs.generic id="email" name="email" required="true" type="email"
-        placeholder="<?= _('Insira seu e-mail...') ?>" class="!bg-indigo-50 w-full">
-      </_inputs.generic>
+      <Input\Generic id="email" name="email" required="true" type="email" placeholder="<?= _('Insira seu e-mail...') ?>"
+        class="!bg-indigo-50 w-full">
+      </Input\Generic>
 
-      <_buttons.primary type="submit" class="px-10 text-nowrap w-full py-4 sm:py-0 sm:w-fit">
+      <Button\Primary type="submit" class="px-10 text-nowrap w-full py-4 sm:py-0 sm:w-fit">
         <?= _('Inscrever-se') ?>
-      </_buttons.primary>
+      </Button\Primary>
     </form>
   </section>
 </main>

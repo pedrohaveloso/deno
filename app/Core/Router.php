@@ -90,7 +90,10 @@ class Router
       if (is_string($action)) {
         $action = explode('@', $action);
 
-        $class = 'App\\Controller\\' . mb_convert_case($action[0], MB_CASE_TITLE) . 'Controller';
+        $action[0] = mb_convert_case($action[0], MB_CASE_TITLE);
+        $action[0] = str_replace('/', '\\', $action[0]);
+
+        $class = 'App\\Controller\\' . $action[0] . 'Controller';
         $method = $action[1];
 
         $class = new $class();
@@ -101,7 +104,7 @@ class Router
 
       $action();
     } catch (\Throwable | \Error | \Exception $exception) {
-      if (ini_get('display_errors') === 1) {
+      if (ini_get('display_errors') == 1) {
         var_dump($exception->getMessage());
       }
 

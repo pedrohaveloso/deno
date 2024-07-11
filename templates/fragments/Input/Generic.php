@@ -10,7 +10,7 @@
       <?= isset($attributes['required']) ? 'required' : '' ?>>
 
     <? if (!empty($attributes['icon'])): ?>
-      <_icon name="<?= $attributes['icon'] ?>" class="pe-6 *:!fill-gray-700"></_icon>
+      <Icon name="<?= $attributes['icon'] ?>" class="pe-6 *:!fill-gray-700"></Icon>
     <? endif; ?>
   </div>
 

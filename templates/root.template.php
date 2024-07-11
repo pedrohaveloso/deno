@@ -4,7 +4,7 @@
  * -----------------------------------------------------------------------------
  * Esse é o arquivo responsável pela base de todas as páginas do sistema, 
  * qualquer requisição retornando uma view terá como base esse molde. O restante
- * da página será inserido no local da variável [$inner_content].
+ * da página será inserido no local da variável [$content].
  * -----------------------------------------------------------------------------
  */
 
@@ -38,11 +38,12 @@
 </head>
 
 <body class="*:text-indigo-950 min-h-screen flex flex-col">
-  <?= $inner_content ?>
+  <?= $content ?>
 
   <script defer src="/public/assets/scripts/main.js"></script>
 
   <!-- AlpineJS script: -->
+  <script defer src="/public/assets/scripts/alpinejs/persist-3.14.1.min.js"></script>
   <script defer src="/public/assets/scripts/alpinejs/alpinejs-3.14.1.min.js"></script>
 
   <!-- HTMX script: -->

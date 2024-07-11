@@ -3,10 +3,10 @@
 
   <div class="gap-8 text-center lg:text-start lg:gap-0 flex flex-col lg:flex-row flex-grow justify-between pt-8">
     <section class="flex flex-col gap-4 flex-grow items-center justify-center">
-      <_icon name="logo" class="*:!h-16 *:!w-16"></_icon>
+      <Icon name="logo" class="*:!h-16 *:!w-16"></Icon>
 
       <p class="flex gap-2 items-center">
-        <_icon name="distance"></_icon>
+        <Icon name="distance"></Icon>
         <span>
           Av. dos corações, 5700
           <br />

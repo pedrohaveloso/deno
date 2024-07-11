@@ -1,4 +1,4 @@
-<div x-data="{ open: true }" class="flex flex-grow">
+<div x-data="{ open: $persist(false) }" class="flex flex-grow">
   <aside x-bind:class="open ? 'w-64' : 'w-24'"
     class="min-h-screen p-8 bg-indigo-950 text-white transition-width duration-300 flex items-center justify-center">
 
@@ -6,11 +6,11 @@
       <button class="flex gap-2" x-bind:aria-label="open ? '<?= _('Fechar menu') ?>' : '<?= _('Abrir menu') ?>'"
         x-on:click="open = !open">
         <template x-if="!open">
-          <_icon name="menu" class="*:fill-white"></_icon>
+          <Icon name="menu" class="*:fill-white"></Icon>
         </template>
 
         <template x-if="open">
-          <_icon name="close" class="*:fill-white"></_icon>
+          <Icon name="close" class="*:fill-white"></Icon>
         </template>
 
         <span x-show="open" class="transition-opacity duration-300" x-bind:class="{'opacity-0': !open}">
@@ -21,7 +21,7 @@
       <menu class="flex flex-col gap-6">
         <li>
           <a href="/admin/profile" class="flex gap-2">
-            <_icon name="satisfied" class="*:fill-white"></_icon>
+            <Icon name="satisfied" class="*:fill-white"></Icon>
 
             <span x-show="open" class="transition-opacity duration-300" x-bind:class="{'opacity-0': !open}">
               <?= _('Sua conta') ?>
@@ -31,7 +31,7 @@
 
         <li>
           <a href="/backoffice/users" class="flex gap-2">
-            <_icon name="person" class="*:fill-white"></_icon>
+            <Icon name="person" class="*:fill-white"></Icon>
 
             <span x-show="open" class="transition-opacity duration-300" x-bind:class="{'opacity-0': !open}">
               <?= _('Usuários') ?>
@@ -41,7 +41,7 @@
 
         <li>
           <a href="/backoffice/admins" class="flex gap-2">
-            <_icon name="shield_person" class="*:fill-white"></_icon>
+            <Icon name="shield_person" class="*:fill-white"></Icon>
 
             <span x-show="open" class="transition-opacity duration-300" x-bind:class="{'opacity-0': !open}">
               <?= _('Administradores') ?>
@@ -51,7 +51,7 @@
 
         <li>
           <a href="/backoffice/carts" class="flex gap-2">
-            <_icon name="cart" class="*:fill-white"></_icon>
+            <Icon name="cart" class="*:fill-white"></Icon>
 
             <span x-show="open" class="transition-opacity duration-300" x-bind:class="{'opacity-0': !open}">
               <?= _('Carrinhos') ?>
@@ -61,7 +61,7 @@
 
         <li>
           <a href="/backoffice/products" class="flex gap-2">
-            <_icon name="products" class="*:fill-white"></_icon>
+            <Icon name="products" class="*:fill-white"></Icon>
 
             <span x-show="open" class="transition-opacity duration-300" x-bind:class="{'opacity-0': !open}">
               <?= _('Produtos') ?>
@@ -71,7 +71,7 @@
 
         <li>
           <a href="/backoffice/categories" class="flex gap-2">
-            <_icon name="category" class="*:fill-white"></_icon>
+            <Icon name="category" class="*:fill-white"></Icon>
 
             <span x-show="open" class="transition-opacity duration-300" x-bind:class="{'opacity-0': !open}">
               <?= _('Categorias') ?>
@@ -81,7 +81,7 @@
       </menu>
 
       <a href="/admin/logoff" class="flex gap-2">
-        <_icon name="logout" class="*:fill-white"></_icon>
+        <Icon name="logout" class="*:fill-white"></Icon>
 
         <span x-show="open" class="transition-opacity duration-300" x-bind:class="{'opacity-0': !open}">
           <?= _('Sair') ?>
@@ -91,6 +91,6 @@
   </aside>
 
   <div class="flex-grow">
-    <?= $inner_content ?>
+    <?= $content ?>
   </div>
 </div>

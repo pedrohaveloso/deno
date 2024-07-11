@@ -7,6 +7,7 @@ Router::group(
   '/backoffice',
   routes: [
     Router::get('/', 'backoffice@index'),
+    Router::get('/categories', 'backoffice/categories@index'),
   ],
   guard: Router::guard(
     fn() => !Session::admin_is_logged(),

@@ -11,7 +11,7 @@ $search_element = function (string $responsive) {
       class="w-full h-full bg-transparent ps-4 outline-none">
 
     <button aria-label="<?= _('Pesquisar') ?>" class="pe-4">
-      <_icon name="search"></_icon>
+      <Icon name="search"></Icon>
     </button>
   </search>
   <?
@@ -21,21 +21,21 @@ $menu_options_element = function () use ($current_page, $search_element) {
   ?>
   <li>
     <a href="/home" class="flex gap-1 <?= $current_page == 'home' ? 'font-bold' : '' ?>">
-      <_icon name="home"></_icon>
+      <Icon name="home"></Icon>
       <?= _('Início') ?>
     </a>
   </li>
 
   <li>
     <a href="/products" class="flex gap-1 <?= $current_page == 'products' ? 'font-bold' : '' ?>">
-      <_icon name="products"></_icon>
+      <Icon name="products"></Icon>
       <?= _('Produtos') ?>
     </a>
   </li>
 
   <li>
     <a href="/contact" class="flex gap-1 <?= $current_page == 'contact' ? 'font-bold' : '' ?>">
-      <_icon name="contact"></_icon>
+      <Icon name="contact"></Icon>
       <?= _('Atendimento') ?>
     </a>
   </li>
@@ -52,17 +52,17 @@ $menu_options_element = function () use ($current_page, $search_element) {
   <div class="flex justify-between">
     <section class="flex gap-2 items-center">
       <a href="/" aria-label="<?= _('Página inicial') ?>" class="mr-4">
-        <_icon name="logo" class="*:!h-10 *:!w-10"></_icon>
+        <Icon name="logo" class="*:!h-10 *:!w-10"></Icon>
       </a>
 
       <button x-bind:aria-label="open ? '<?= _('Fechar menu') ?>' : '<?= _('Abrir menu') ?>'" x-on:click="open = !open"
         class="lg:hidden">
         <template x-if="!open">
-          <_icon name="menu"></_icon>
+          <Icon name="menu"></Icon>
         </template>
 
         <template x-if="open">
-          <_icon name="close"></_icon>
+          <Icon name="close"></Icon>
         </template>
       </button>
 
@@ -73,7 +73,7 @@ $menu_options_element = function () use ($current_page, $search_element) {
 
     <section class="flex gap-4 items-center">
       <a href="/cart" aria-label="<?= _('Seu carrinho') ?>" class="flex gap-2">
-        <_icon name="cart"></_icon>
+        <Icon name="cart"></Icon>
         Seu carrinho
       </a>
 
@@ -82,7 +82,7 @@ $menu_options_element = function () use ($current_page, $search_element) {
       <a href="<?= Session::user_is_logged() ? '/profile' : '/user/choice' ?>">
         <button aria-label="<?= _('Sua conta') ?>"
           class="bg-indigo-100 hover:bg-indigo-200 transition-all duration-500 rounded-2xl h-10 w-10 grid place-items-center">
-          <_icon name="person"></_icon>
+          <Icon name="person"></Icon>
         </button>
       </a>
     </section>
