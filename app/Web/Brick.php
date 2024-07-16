@@ -19,9 +19,14 @@ final class Brick
     return $brick_content;
   }
 
-  public static function render(string $name, ...$attributes)
+  public static function get_render(string $name, ...$attributes)
   {
-    echo self::get($name, $attributes);
+    self::render(self::get($name, $attributes));
+  }
+
+  public static function render(string $brick_content)
+  {
+    echo $brick_content;
   }
 
   public static function redirect(string $to)

@@ -1,6 +1,6 @@
 <?
 
-namespace App\Core\Utils;
+namespace App\Utils;
 
 class Str
 {

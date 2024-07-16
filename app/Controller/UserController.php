@@ -36,7 +36,7 @@ class UserController extends Controller
       empty($db_user)
       || password_verify($user['password'], $db_user['password']) == false
     ) {
-      return Brick::render('user/login/invalid_credentials');
+      return Brick::get_render('user/login/invalid_credentials');
     }
 
     Session::set_user($db_user);
@@ -58,13 +58,13 @@ class UserController extends Controller
     $user = Request::post_data();
 
     if (UserRepository::get_by_email($user['email']) != null) {
-      return Brick::render('user/register/already_exists');
+      return Brick::get_render('user/register/already_exists');
     }
 
     $errors = UserRepository::insert_changeset($user);
 
     if (!empty($errors)) {
-      return Brick::render('user/register/changeset_errors', errors: $errors);
+      return Brick::get_render('user/register/changeset_errors', errors: $errors);
     }
 
     UserRepository::insert($user);

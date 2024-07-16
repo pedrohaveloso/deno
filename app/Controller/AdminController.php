@@ -27,7 +27,7 @@ class AdminController extends Controller
       empty($db_admin)
       || password_verify($admin['password'], $db_admin['password']) == false
     ) {
-      return Brick::render('admin/login/invalid_credentials');
+      return Brick::get_render('admin/login/invalid_credentials');
     }
 
     Session::set_admin($db_admin);

@@ -13,4 +13,14 @@ final class Request
   {
     return $_POST[$key] ?? null;
   }
+
+  public static function get_data(): array
+  {
+    return $_GET ?? [];
+  }
+
+  public static function get_data_by_key(string $key): mixed
+  {
+    return $_GET[$key] ?? null;
+  }
 }
