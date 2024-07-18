@@ -9,13 +9,13 @@
 
   <div class="flex flex-col sm:flex-row gap-4 sm:gap-2 mt-6 text-lg w-full sm:w-fit">
     <a href="/user/login">
-      <Button\Secondary type="submit" class="w-full sm:w-fit h-12 px-14">
+      <Button\Secondary class="w-full sm:w-fit h-12 px-14">
         <?= _('Entrar') ?>
       </Button\Secondary>
     </a>
 
     <a href="/user/register">
-      <Button\Primary type="submit" class="w-full sm:w-fit h-12 px-14">
+      <Button\Primary class="w-full sm:w-fit h-12 px-14">
         <?= _('Cadastrar-se') ?>
       </Button\Primary>
     </a>
@@ -23,7 +23,7 @@
 
   <a href="/admin/login">
     <small>
-      É administrador? Entre aqui.
+      <?= _('É administrador? Entre aqui.') ?>
     </small>
   </a>
 </main>

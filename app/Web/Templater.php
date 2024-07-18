@@ -32,9 +32,31 @@ trait Templater
           $attributes[$attr[1]] = $attr[2];
         }
 
+        $printed_attr = [];
+
+        $attr = function (string $name) use ($attributes, $printed_attr) {
+          if ($name === 'rest') {
+            $rest = '';
+
+            foreach ($attributes as $name => $value) {
+              if (in_array($name, $printed_attr)) {
+                continue;
+              }
+
+              $rest .= " $name=\"$value\" ";
+            }
+
+            return $rest;
+          }
+
+          $printed_attr[] = $name;
+
+          return $attributes[$name] ?? null;
+        };
+
         ob_start();
 
-        $scope = function () use ($name, $children, $attributes) {
+        $scope = function () use ($name, $children, $attr) {
           $name = str_replace('\\', '/', $name);
 
           include FRAGMENTSDIR . $name . '.php';

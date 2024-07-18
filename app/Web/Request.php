@@ -4,6 +4,16 @@ namespace App\Web;
 
 final class Request
 {
+  public static function path(): string
+  {
+    return explode('?', $_SERVER['REQUEST_URI'])[0];
+  }
+
+  public static function is_pagination(): bool
+  {
+    return self::get_data_by_key('paginator') !== null;
+  }
+
   public static function post_data(): array
   {
     return $_POST ?? [];

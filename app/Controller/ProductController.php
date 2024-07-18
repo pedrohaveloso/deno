@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Web\View;
 
-class ProductsController extends Controller
+class ProductController extends Controller
 {
   public function index()
   {

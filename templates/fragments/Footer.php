@@ -3,7 +3,7 @@
 
   <div class="gap-8 text-center lg:text-start lg:gap-0 flex flex-col lg:flex-row flex-grow justify-between pt-8">
     <section class="flex flex-col gap-4 flex-grow items-center justify-center">
-      <Icon name="logo" class="*:!h-16 *:!w-16"></Icon>
+      <Icon name="logo" class="!h-16 !w-16"></Icon>
 
       <p class="flex gap-2 items-center">
         <Icon name="distance"></Icon>

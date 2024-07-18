@@ -2,7 +2,7 @@
 
 use App\Core\Session;
 
-$current_page = $attributes['current-page'] ?? '';
+$current_page = $attr('current-page') ?? '';
 
 $search_element = function (string $responsive) {
   ?>
@@ -52,7 +52,7 @@ $menu_options_element = function () use ($current_page, $search_element) {
   <div class="flex justify-between">
     <section class="flex gap-2 items-center">
       <a href="/" aria-label="<?= _('Página inicial') ?>" class="mr-4">
-        <Icon name="logo" class="*:!h-10 *:!w-10"></Icon>
+        <Icon name="logo" class="h-10 w-10"></Icon>
       </a>
 
       <button x-bind:aria-label="open ? '<?= _('Fechar menu') ?>' : '<?= _('Abrir menu') ?>'" x-on:click="open = !open"

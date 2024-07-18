@@ -12,7 +12,7 @@ Router::group(
 
     Router::get('/home', 'home@index'),
     Router::get('/contact', 'home@contact'),
-    Router::get('/products', 'products@index')
+    Router::get('/products', 'product@index')
   ]
 );
 
