@@ -3,7 +3,6 @@
 namespace App\Controller\Backoffice;
 
 use App\Controller\Controller;
-use App\Repository\ProductRepository;
 use App\Web\Brick;
 use App\Web\Paginator;
 use App\Web\Request;
@@ -15,12 +14,10 @@ class ProductController extends Controller
   {
     $filter = Request::get_data_by_key('filter');
 
-    $query = ProductRepository::get_all_query(
+    $query = \App\Repo\Product::get_all_query(
       $filter['name'] ?? null,
       $filter['description'] ?? null,
     );
-
-    dd($query->get());
 
     $paginator = Paginator::from_query($query);
 

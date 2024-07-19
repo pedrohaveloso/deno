@@ -3,7 +3,6 @@
 namespace App\Controller\Backoffice;
 
 use App\Controller\Controller;
-use App\Repository\CategoryRepository;
 use App\Web\Brick;
 use App\Web\Paginator;
 use App\Web\Request;
@@ -15,7 +14,7 @@ class CategoryController extends Controller
   {
     $filter = Request::get_data_by_key('filter');
 
-    $query = CategoryRepository::get_all_query(
+    $query = \App\Repo\Category::get_all_query(
       $filter['name'] ?? null,
       $filter['description'] ?? null,
     );

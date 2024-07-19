@@ -1,8 +1,8 @@
 <?
 
-namespace App\Repository;
+namespace App\Repo;
 
-class UserRepository extends Repository
+class User extends Repo
 {
   public static function get_by_email(string $email): array|null
   {

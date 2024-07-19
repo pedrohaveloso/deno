@@ -12,6 +12,9 @@ use App\Utils\Formatter;
       <tr>
         <th><?= _('Nome') ?></th>
         <th><?= _('Descrição') ?></th>
+        <th><?= _('Valor') ?></th>
+        <th><?= _('Estoque') ?></th>
+        <th><?= _('Parcelável') ?></th>
         <th><?= _('Última atualização') ?></th>
         <th><?= _('Ações') ?></th>
       </tr>
@@ -25,6 +28,15 @@ use App\Utils\Formatter;
           </td>
           <td>
             <?= Formatter::text_max_length($category['description'], 30) ?>
+          </td>
+          <td>
+            <?= Formatter::to_money($category['value']) ?>
+          </td>
+          <td>
+            <?= $category['in_stock'] ?>
+          </td>
+          <td>
+            <?= $category['is_installment'] ? _('Sim') : _('Não') ?>
           </td>
           <td>
             <?= Formatter::to_datetime_default($category['updated_at']) ?>

@@ -6,6 +6,10 @@ use App\Core\Database\QueryBuilder;
 
 class Paginator
 {
+  private function __construct()
+  {
+  }
+
   public static function from_query(
     QueryBuilder $query,
     string $target = '#paginator',

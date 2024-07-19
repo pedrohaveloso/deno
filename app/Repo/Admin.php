@@ -1,8 +1,8 @@
 <?
 
-namespace App\Repository;
+namespace App\Repo;
 
-class AdminRepository extends Repository
+class Admin extends Repo
 {
   public static function get_by_username(string $username): array|null
   {

@@ -6,100 +6,199 @@ use PDO;
 
 class QueryBuilder
 {
-  public function __construct(string $table_name, PDO $pdo_connection)
+  public function __construct(TableString $table, PDO $pdo_connection)
   {
-    $this->table_name = $table_name;
+    $this->table = $table;
     $this->pdo_connection = $pdo_connection;
   }
 
+  /**
+   * Conexão PDO do Builder.
+   * @var PDO
+   */
   private PDO $pdo_connection;
 
-  private string $table_name;
+  /**
+   * Tabela primária utilizada.
+   * @var TableString
+   */
+  private TableString $table;
 
-  private ?array $select = null;
+  /**
+   * Colunas a serem selecionadas.
+   * @var ColumnString[] 
+   */
+  private array $select = ['*'];
 
-  private ?string $order_by = null;
+  /**
+   * Coluna para ordenação.
+   * @var ColumnString|null
+   */
+  private ColumnString|null $order_by = null;
 
+
+  /**
+   * Define se a ordenação será descendente.
+   * @var bool
+   */
   private bool $order_by_desc = false;
 
-  private ?array $where = [];
+  /**
+   * Comparações da query.
+   * @var WhereClause[]
+   */
+  private array $where = [];
 
   private ?int $limit = null;
 
   private ?int $offset = null;
 
-  private ?array $join = [];
+  /**
+   * JOINs com outras tabelas. 
+   * @var JoinClause[]
+   */
+  private array $join = [];
 
-  private ?array $group_by = null;
+  /**
+   * Define o agrupamento.
+   * @var ColumnString[]
+   */
+  private array $group_by = [];
 
-  private ?array $having = [];
+  /**
+   * @var HavingClause[] 
+   */
+  private array $having = [];
 
-  private ?array $union = [];
+  /**
+   * Une outras queries.
+   * @var QueryBuilder[]
+   */
+  private array $union = [];
 
-  public function select(array $select = []): QueryBuilder
-  {
-    $this->select = $select;
+  public function select(
+    ColumnString $select = null,
+    ColumnString ...$rest
+  ): QueryBuilder {
+    $this->select = $select === null
+      ? ['*']
+      : $this->select = [$select, ...$rest];
+
     return $this;
   }
 
-  public function order_by_desc(string $column_name): QueryBuilder
+  public function order_by(ColumnString $column): QueryBuilder
   {
-    $this->order_by = $column_name;
+    $this->order_by = $column;
+    $this->order_by_desc = false;
+
+    return $this;
+  }
+
+  public function order_by_desc(ColumnString $column): QueryBuilder
+  {
+    $this->order_by = $column;
     $this->order_by_desc = true;
+
     return $this;
   }
 
-  public function where(string $column, string $operator, $value): QueryBuilder
-  {
-    $this->where[] = [$column, $operator, $value];
+  public function where(
+    ColumnString $column,
+    string $operator,
+    mixed $value
+  ): QueryBuilder {
+    $this->where[] = new WhereClause($column, $operator, $value);
+
     return $this;
   }
 
   public function limit(int $limit): QueryBuilder
   {
     $this->limit = $limit;
+
     return $this;
   }
 
   public function offset(int $offset): QueryBuilder
   {
     $this->offset = $offset;
+
     return $this;
   }
 
-  public function join(string $table, string $column1, string $operator, string $column2): QueryBuilder
-  {
-    $this->join[] = ["type" => "INNER JOIN", "table" => $table, "condition" => [$column1, $operator, $column2]];
+  public function join(
+    TableString $table,
+    ColumnString $first_column,
+    string $operator,
+    ColumnString $second_column
+  ): QueryBuilder {
+    $this->join[] = new JoinClause(
+      JoinType::Inner,
+      $table,
+      $first_column,
+      $operator,
+      $second_column
+    );
+
     return $this;
   }
 
-  public function left_join(string $table, string $column1, string $operator, string $column2): QueryBuilder
-  {
-    $this->join[] = ["type" => "LEFT JOIN", "table" => $table, "condition" => [$column1, $operator, $column2]];
+  public function left_join(
+    TableString $table,
+    ColumnString $first_column,
+    string $operator,
+    ColumnString $second_column
+  ): QueryBuilder {
+    $this->join[] = new JoinClause(
+      JoinType::Left,
+      $table,
+      $first_column,
+      $operator,
+      $second_column
+    );
+
     return $this;
   }
 
-  public function right_join(string $table, string $column1, string $operator, string $column2): QueryBuilder
-  {
-    $this->join[] = ["type" => "RIGHT JOIN", "table" => $table, "condition" => [$column1, $operator, $column2]];
+  public function right_join(
+    TableString $table,
+    ColumnString $first_column,
+    string $operator,
+    ColumnString $second_column
+  ): QueryBuilder {
+    $this->join[] = new JoinClause(
+      JoinType::Right,
+      $table,
+      $first_column,
+      $operator,
+      $second_column
+    );
+
     return $this;
   }
 
-  public function group_by(array $columns): QueryBuilder
+  public function group_by(ColumnString ...$columns): QueryBuilder
   {
     $this->group_by = $columns;
+
     return $this;
   }
 
-  public function having(string $column, string $operator, $value): QueryBuilder
-  {
-    $this->having[] = [$column, $operator, $value];
+  public function having(
+    ColumnString $column,
+    string $operator,
+    mixed $value
+  ): QueryBuilder {
+    $this->having[] = new HavingClause($column, $operator, $value);
+
     return $this;
   }
 
   public function union(QueryBuilder $query): QueryBuilder
   {
     $this->union[] = $query;
+
     return $this;
   }
 
@@ -107,82 +206,77 @@ class QueryBuilder
   {
     $this->limit = $items_per_page;
     $this->offset = ($page - 1) * $items_per_page;
+
     return $this;
   }
 
-  private function format_column(string $column): string
+  /**
+   * ---------------------------------------------------------------------------
+   */
+
+  private function query()
   {
-    if ($column === "*") {
-      return $column;
-    }
-
-    return join('.', array_map(function ($part) {
-      if ($part === "*") {
-        return $part;
-      }
-
-      return "\"$part\"";
-    }, explode('.', $column)));
-  }
-
-  public function get()
-  {
-    $columns = (empty($this->select))
+    $selects = $this->select == ['*']
       ? '*'
-      : join(',', array_map(function ($column) {
-        return $this->format_column($column);
-      }, $this->select));
+      : join(
+        ', ',
+        array_map(
+          fn(ColumnString $select) => $select->get(),
+          $this->select
+        )
+      );
 
-    $query = "SELECT $columns FROM \"$this->table_name\"";
+    $query = " SELECT $selects FROM {$this->table->get()} ";
 
-    if ($this->join) {
-      foreach ($this->join as $join) {
-        $join_table = "\"$join[table]\"";
-
-        $condition =
-          $this->format_column($join['condition'][0])
-          . ' ' . $join['condition'][1] . ' '
-          . $this->format_column($join['condition'][2]);
-
-        $query .= " {$join['type']} $join_table ON $condition";
-      }
+    foreach ($this->join as $join) {
+      $query .= " {$join->get()} ";
     }
 
-    dd($query);
+    if ($this->where != []) {
+      $clauses = array_map(
+        fn(WhereClause $clause) => $clause->get(),
+        $this->where
+      );
 
-    if ($this->where) {
-      $conditions = array_map(function ($condition) use ($table_alias) {
-        return $this->format_condition($condition, $table_alias);
-      }, $this->where);
-      $query .= " WHERE " . implode(' AND ', $conditions);
+      $query .= ' WHERE ' . implode(' AND ', $clauses) . ' ';
     }
 
-    if ($this->group_by) {
-      $group_columns = implode(', ', array_map([$this, 'quote_identifier'], $this->group_by));
-      $query .= " GROUP BY $group_columns";
+    if ($this->group_by != []) {
+      $group_columns = implode(
+        ', ',
+        array_map(
+          fn(ColumnString $column) => $column->get(),
+          $this->group_by
+        )
+      );
+
+      $query .= " GROUP BY $group_columns ";
     }
 
-    if ($this->having) {
-      $having_conditions = array_map(function ($condition) use ($table_alias) {
-        return $this->format_condition($condition, $table_alias);
-      }, $this->having);
-      $query .= " HAVING " . implode(' AND ', $having_conditions);
+    if ($this->having != []) {
+      $clauses = array_map(
+        fn(WhereClause $clause) => $clause->get(),
+        $this->having
+      );
+
+      $query .= ' HAVING ' . implode(' AND ', $clauses) . ' ';
     }
 
-    if ($this->order_by) {
-      $order = $this->order_by_desc ? 'DESC' : 'ASC';
-      $query .= " ORDER BY " . $this->quote_identifier($this->order_by) . " $order";
+    if ($this->order_by !== null) {
+      $order = $this->order_by_desc ? ' DESC ' : ' ASC ';
+
+      $query .= ' ORDER BY ' . $this->order_by->get() . " $order ";
     }
 
-    if ($this->limit) {
-      $query .= " LIMIT {$this->limit}";
+    if ($this->limit !== null) {
+      $query .= " LIMIT {$this->limit} ";
     }
 
     if ($this->offset !== null) {
-      $query .= " OFFSET {$this->offset}";
+      $query .= " OFFSET {$this->offset} ";
     }
 
-    if ($this->union) {
+    if ($this->union != []) {
       foreach ($this->union as $union_query) {
         $query .= " UNION " . $union_query->get();
       }
@@ -190,20 +284,30 @@ class QueryBuilder
 
     $stmt = $this->pdo_connection->prepare($query);
 
-    if ($this->where) {
-      foreach ($this->where as $condition) {
-        list($column, $operator, $value) = $condition;
-        $stmt->bindValue(":$column", $value);
+    if ($this->where != []) {
+      foreach ($this->where as $clause) {
+        $stmt->bindValue(
+          $clause->replace_label,
+          $clause->value
+        );
       }
     }
 
-    if ($this->having) {
-      foreach ($this->having as $condition) {
-        list($column, $operator, $value) = $condition;
-        $stmt->bindValue(":having_$column", $value);
+    if ($this->having != []) {
+      foreach ($this->having as $clause) {
+        $stmt->bindValue(
+          $clause->replace_label,
+          $clause->value
+        );
       }
     }
 
+    return $stmt;
+  }
+
+  public function get()
+  {
+    $stmt = $this->query();
     $stmt->execute();
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -211,6 +315,9 @@ class QueryBuilder
 
   public function count()
   {
+    $stmt = $this->query();
+    $stmt->execute();
 
+    return $stmt->rowCount();
   }
 }

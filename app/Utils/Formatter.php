@@ -2,6 +2,8 @@
 
 namespace App\Utils;
 
+use NumberFormatter;
+
 class Formatter
 {
   public static function text_max_length(
@@ -33,5 +35,16 @@ class Formatter
   public static function to_time_default(string $original): string
   {
     return date_create($original)->format('H:i:s');
+  }
+
+  private static ?NumberFormatter $numfmt = null;
+
+  public static function to_money(string|int|float $original)
+  {
+    if (self::$numfmt === null) {
+      self::$numfmt = new NumberFormatter('pt_BR', NumberFormatter::CURRENCY);
+    }
+
+    return self::$numfmt->formatCurrency($original, 'BRL');
   }
 }

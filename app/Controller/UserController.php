@@ -2,8 +2,6 @@
 
 namespace App\Controller;
 
-use App\Repository\UserRepository;
-
 use App\Core\Session;
 use App\Web\{Brick, Request, View};
 
@@ -30,7 +28,7 @@ class UserController extends Controller
   {
     $user = Request::post_data();
 
-    $db_user = UserRepository::get_by_email($user['email']);
+    $db_user = \App\Repo\User::get_by_email($user['email']);
 
     if (
       empty($db_user)
@@ -57,17 +55,17 @@ class UserController extends Controller
   {
     $user = Request::post_data();
 
-    if (UserRepository::get_by_email($user['email']) != null) {
+    if (\App\Repo\User::get_by_email($user['email']) != null) {
       return Brick::get_render('user/register/already_exists');
     }
 
-    $errors = UserRepository::insert_changeset($user);
+    $errors = \App\Repo\User::insert_changeset($user);
 
     if (!empty($errors)) {
       return Brick::get_render('user/register/changeset_errors', errors: $errors);
     }
 
-    UserRepository::insert($user);
+    \App\Repo\User::insert($user);
 
     Session::set_user($user);
 

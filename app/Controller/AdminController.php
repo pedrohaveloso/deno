@@ -5,8 +5,6 @@ namespace App\Controller;
 use App\Core\Session;
 use App\Web\{Brick, Request, View, Response};
 
-use App\Repository\AdminRepository;
-
 class AdminController extends Controller
 {
   public function login()
@@ -21,7 +19,7 @@ class AdminController extends Controller
   {
     $admin = Request::post_data();
 
-    $db_admin = AdminRepository::get_by_username($admin['username']);
+    $db_admin = \App\Repo\Admin::get_by_username($admin['username']);
 
     if (
       empty($db_admin)
