@@ -47,4 +47,13 @@ class Formatter
 
     return self::$numfmt->formatCurrency($original, 'BRL');
   }
+
+  public static function array_to_attribute(array|null $array): string
+  {
+    if ($array === null) {
+      return '';
+    }
+
+    return htmlspecialchars(json_encode($array), ENT_QUOTES, 'UTF-8');
+  }
 }

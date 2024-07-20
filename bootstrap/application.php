@@ -19,8 +19,11 @@ if (file_exists(__DIR__ . '/../priv/config/local.php')) {
 include __DIR__ . '/constants.php';
 include __DIR__ . '/functions.php';
 
-foreach (glob(ROUTESDIR . '/*.php') as $router_file) {
-  include $router_file;
+$router_files = glob(ROUTESDIR . '/*.php');
+
+foreach ($router_files as $router_file) {
+  /** @var App\Core\Router */
+  ($router = include $router_file)->routes();
 }
 
 App\Core\Application::start();

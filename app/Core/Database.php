@@ -37,7 +37,7 @@ class Database
     if (empty(self::$databases_configs)) {
       $databases_config_file = CONFIGDIR . '/databases.php';
 
-      if (!file_exists($databases_config_file . '/databases.php') === false) {
+      if (!file_exists("$databases_config_file/databases.php") === false) {
         throw new Exception('Arquivo de configuração de banco de dados inexistente.');
       }
 

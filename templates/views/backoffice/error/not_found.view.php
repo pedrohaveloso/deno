@@ -1,4 +1,4 @@
-<main class="text-center flex flex-col flex-grow justify-center items-center gap-6 py-16 p-4">
+<Backoffice\Main class="flex items-center justify-center h-full">
   <h1 class="text-3xl sm:text-4xl font-bold">
     <?= _('Página não encontrada') ?>
   </h1>
@@ -14,10 +14,10 @@
       </Button\Secondary>
     </a>
 
-    <a href="/">
+    <a href="/backoffice">
       <Button\Primary type="submit" class="w-full sm:w-fit h-12 px-14">
         <?= _('Página inicial') ?>
       </Button\Primary>
     </a>
   </div>
-</main>
+</Backoffice\Main>

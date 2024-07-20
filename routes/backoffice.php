@@ -3,34 +3,34 @@
 use App\Core\{Router, Session};
 use App\Web\Response;
 
-Router::group(
-  '/backoffice',
-  routes: [
-    Router::get('/', 'backoffice@index'),
-    Router::get('/categories', 'backoffice/category@index'),
-    Router::get('/products', 'backoffice/product@index'),
-  ],
-  guard: Router::guard(
-    fn() => !Session::admin_is_logged(),
-    fn() => Response::redirect('/admin/login')
-  )
-);
+return new class extends Router {
+  public function routes(): void
+  {
+    self::guard_start(
+      'admin_is_logged',
+      fn() => Session::admin_is_logged(),
+      fn() => Response::redirect('/admin/login')
+    );
 
-Router::group(
-  '/admin',
-  routes: [
-    Router::get('/logoff', 'admin@logoff'),
-  ],
-);
+    self::get('/backoffice', 'backoffice@index');
+    self::get('/backoffice/categories', 'backoffice/category@index');
 
-Router::group(
-  '/admin',
-  routes: [
-    Router::get('/login', 'admin@login'),
-    Router::post('/login', 'admin@login_post'),
-  ],
-  guard: Router::guard(
-    fn() => Session::admin_is_logged(),
-    fn() => Response::redirect('/backoffice')
-  )
-);
+    self::get('/backoffice/products', 'backoffice/product@index');
+    self::get('/backoffice/products/{product_id}', 'backoffice/product@manage');
+
+    self::get('/admin/logoff', 'admin@logoff');
+
+    self::guard_end('admin_is_logged');
+
+    self::guard_start(
+      'admin_is_not_logged',
+      fn() => !Session::admin_is_logged(),
+      fn() => Response::redirect('/backoffice')
+    );
+
+    self::get('/admin/login', 'admin@login');
+    self::post('/admin/login', 'admin@login_post');
+
+    self::guard_end('admin_is_not_logged');
+  }
+};

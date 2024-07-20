@@ -24,4 +24,9 @@ final class View
 
     include TEMPLATESDIR . '/root.template.php';
   }
+
+  public static function fill_form(array $data_to_fill)
+  {
+    
+  }
 }

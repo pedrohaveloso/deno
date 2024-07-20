@@ -4,9 +4,31 @@ namespace App\Web;
 
 final class Request
 {
+  public static function get_path_variable(string $key): string|null
+  {
+    return $GLOBALS['ROUTER_PATH_VARIABLES'][$key] ?? null;
+  }
+
   public static function path(): string
   {
     return explode('?', $_SERVER['REQUEST_URI'])[0];
+  }
+
+  public static function origin_url(): string
+  {
+    if (array_key_exists('HTTP_ORIGIN', $_SERVER)) {
+      return $_SERVER['HTTP_ORIGIN'];
+    }
+
+    if (array_key_exists('HTTP_REFERER', $_SERVER)) {
+      return $_SERVER['HTTP_REFERER'];
+    }
+
+    if (array_key_exists('REMOTE_ADDR', $_SERVER)) {
+      return $_SERVER['REMOTE_ADDR'];
+    }
+
+    return '';
   }
 
   public static function is_pagination(): bool

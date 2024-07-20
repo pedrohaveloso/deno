@@ -1,8 +1,8 @@
-<main class="flex flex-col px-12 py-10 gap-8">
-  <div class="flex justify-between items-center">
-    <h1 class="text-2xl font-medium">
+<Backoffice\Main>
+  <div class="flex justify-between">
+    <Breadcrumb>
       <?= _('Categorias') ?>
-    </h1>
+    </Breadcrumb>
 
     <Button\Primary href="/backoffice/categories/add" class="px-8 py-2">
       <?= _('Adicionar') ?>
@@ -22,4 +22,4 @@
   <div id="paginator" class="flex flex-col gap-8">
     <?= $paginator_brick ?>
   </div>
-</main>
+</Backoffice\Main>

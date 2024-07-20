@@ -305,19 +305,81 @@ class QueryBuilder
     return $stmt;
   }
 
-  public function get()
+  /**
+   * @return array[]|null
+   */
+  public function get(): array|null
   {
     $stmt = $this->query();
     $stmt->execute();
 
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    return $result === false ? null : $result;
   }
 
-  public function count()
+  /**
+   * @return array|null
+   */
+  public function first(): array|null
+  {
+    $original_limit = $this->limit;
+
+    $this->limit = 1;
+
+    $result = $this->get();
+
+    $this->limit = $original_limit;
+
+    if ($result === null) {
+      return null;
+    }
+
+    return $result[0] ?? null;
+  }
+
+  /**
+   * @return int
+   */
+  public function count(): int
   {
     $stmt = $this->query();
     $stmt->execute();
 
     return $stmt->rowCount();
+  }
+
+  /**
+   * @param array{0: ColumnString, 1: mixed} $to_insert
+   */
+  public function insert(...$to_insert): string|int|false
+  {
+    $query = " INSERT INTO {$this->table->get()} ( ";
+    $values = ' VALUES ( ';
+
+    $columns = array_map(fn($insert) => " {$insert[0]->brute_name} ", $to_insert);
+    $labels = array_map(fn($insert) => " :insert_{$insert[0]->brute_name} ", $to_insert);
+
+    $query .= join(' , ', $columns);
+    $values .= join(' , ', $labels);
+
+    $query .= ' ) ';
+    $values .= ' ) RETURNING "id"; ';
+
+    $query .= $values;
+
+    $stmt = $this->pdo_connection->prepare($query);
+
+    foreach ($to_insert as $insert) {
+      $stmt->bindValue(":insert_{$insert[0]->brute_name}", $insert[1]);
+    }
+
+    $result = $stmt->execute();
+
+    if ($result) {
+      return $stmt->fetchColumn();
+    } else {
+      return false;
+    }
   }
 }

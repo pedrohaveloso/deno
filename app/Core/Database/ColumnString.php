@@ -18,4 +18,9 @@ class ColumnString
   {
     return $this->column_name;
   }
+
+  public function __tostring()
+  {
+    return $this->column_name;
+  }
 }

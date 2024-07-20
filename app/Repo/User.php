@@ -6,36 +6,26 @@ class User extends Repo
 {
   public static function get_by_email(string $email): array|null
   {
-    $query = self::db()->prepare(<<<SQL
-      SELECT * FROM "User" WHERE "email" = :email;
-    SQL);
-
-    $query->bindValue(':email', $email);
-
-    $query->execute();
-
-    return $query->fetchAll(\PDO::FETCH_ASSOC)[0] ?? null;
+    return self::table(User::name())
+      ->where(User::col('email'), '=', $email)
+      ->first();
   }
 
   public static function insert(array &$user): bool
   {
-    $query = self::db()->prepare(<<<SQL
-        INSERT INTO "User" ("fullname", "password", "email")
-        VALUES (:fullname, :password, :email)
-        RETURNING "id";
-      SQL);
+    $result = self::table(User::name())
+      ->insert(
+        [User::col('fullname'), $user['fullname']],
+        [User::col('email'), $user['email']],
+        [User::col('password'), $user['password']],
+      );
 
-    $query->bindValue(':fullname', $user['fullname']);
-    $query->bindValue(':password', $user['password']);
-    $query->bindValue(':email', $user['email']);
+    if ($result === false) {
 
-    $result = $query->execute();
-
-    if ($result) {
-      $user['id'] = $query->fetchColumn();
-    } else {
       return false;
     }
+
+    $user['id'] = $result;
 
     return true;
   }

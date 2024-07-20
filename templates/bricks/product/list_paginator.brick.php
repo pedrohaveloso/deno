@@ -42,7 +42,7 @@ use App\Utils\Formatter;
             <?= Formatter::to_datetime_default($category['updated_at']) ?>
           </td>
           <td>
-            <a href="/backoffice/product/edit/<?= $category['id'] ?>" class="w-full h-full">
+            <a href="/backoffice/products/<?= $category['id'] ?>" class="w-full h-full">
               Editar
             </a>
           </td>

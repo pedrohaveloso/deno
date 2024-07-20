@@ -2,8 +2,6 @@
 
 namespace App\Core;
 
-use Exception;
-
 class Application
 {
   public static function start()

@@ -1,0 +1,384 @@
+# English translations for PACKAGE package.
+# Copyright (C) 2024 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Pedro Veloso <contatopedrohalves@gmail.com>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-07-20 10:27-0300\n"
+"PO-Revision-Date: 2024-07-20 10:27-0300\n"
+"Last-Translator: Pedro Veloso <contatopedrohalves@gmail.com>\n"
+"Language-Team: English\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: templates/views/backoffice/admin/login.view.php:4
+#: templates/views/backoffice/error/not_found.view.php:13
+#: templates/views/shop/error/not_found.view.php:13 app/Web/Paginator.php:74
+msgid "Voltar"
+msgstr "Back"
+
+#: templates/views/backoffice/admin/login.view.php:14
+msgid "Painel administrativo"
+msgstr "Administrative panel"
+
+#: templates/views/backoffice/admin/login.view.php:18
+msgid "Digite seu usuário..."
+msgstr "Enter your username..."
+
+#: templates/views/backoffice/admin/login.view.php:19
+msgid "Usuário"
+msgstr "Username"
+
+#: templates/views/backoffice/admin/login.view.php:23
+msgid "Digite sua senha..."
+msgstr "Enter your password..."
+
+#: templates/views/backoffice/admin/login.view.php:23
+#: templates/views/shop/user/register.view.php:18
+#: templates/views/shop/user/login.view.php:28
+msgid "Senha"
+msgstr "Password"
+
+#: templates/views/backoffice/admin/login.view.php:31
+#: templates/views/shop/user/login.view.php:36
+#: templates/views/shop/user/choice.view.php:13
+#: app/Controller/UserController.php:23
+msgid "Entrar"
+msgstr "Login"
+
+#: templates/views/backoffice/error/not_found.view.php:3
+#: templates/views/shop/error/not_found.view.php:3
+#: app/Controller/ErrorController.php:21 app/Controller/ErrorController.php:28
+msgid "Página não encontrada"
+msgstr "Page not found"
+
+#: templates/views/backoffice/error/not_found.view.php:7
+#: templates/views/shop/error/not_found.view.php:7
+msgid "A página que você está procurando não foi encontrada."
+msgstr "The page you are looking for was not found."
+
+#: templates/views/backoffice/error/not_found.view.php:19
+#: templates/views/shop/error/not_found.view.php:19
+#: templates/fragments/Navbar.php:54
+msgid "Página inicial"
+msgstr "Home"
+
+#: templates/views/backoffice/category/index.view.php:4
+#: templates/layouts/backoffice.layout.php:73
+#: templates/layouts/backoffice.layout.php:77
+msgid "Categorias"
+msgstr "Categories"
+
+#: templates/views/backoffice/category/index.view.php:8
+#: templates/views/backoffice/product/index.view.php:8
+#: templates/views/backoffice/product/add.view.php:4
+#: templates/views/shop/home/index.view.php:36
+msgid "Adicionar"
+msgstr "Add"
+
+#: templates/views/backoffice/category/index.view.php:13
+#: templates/views/backoffice/product/index.view.php:13
+#: templates/views/shop/user/register.view.php:10
+#: templates/bricks/category/list_paginator.brick.php:13
+#: templates/bricks/product/list_paginator.brick.php:13
+msgid "Nome"
+msgstr "Name"
+
+#: templates/views/backoffice/category/index.view.php:16
+#: templates/views/backoffice/product/index.view.php:16
+#: templates/bricks/category/list_paginator.brick.php:14
+#: templates/bricks/product/list_paginator.brick.php:14
+msgid "Descrição"
+msgstr "Description"
+
+#: templates/views/backoffice/product/index.view.php:4
+#: templates/views/backoffice/product/add.view.php:3
+#: templates/fragments/Navbar.php:32 templates/layouts/backoffice.layout.php:63
+#: templates/layouts/backoffice.layout.php:67
+#: app/Controller/ProductController.php:15
+msgid "Produtos"
+msgstr "Products"
+
+#: templates/views/shop/home/index.view.php:4
+#: templates/views/shop/user/register.view.php:38
+msgid "Bem-vindo à"
+msgstr "Welcome to"
+
+#: templates/views/shop/home/index.view.php:8
+msgid ""
+"sua parceira de confiança no setor industrial. \n"
+"      Por décadas, temos nos dedicado a fornecer soluções inovadoras que \n"
+"      capacitam empresas a se destacarem em seus respectivos campos."
+msgstr ""
+"your trusted partner in the industrial sector. \n"
+"      For decades, we have been committed to providing innovative solutions that \n"
+"      empower businesses to excel in their respective fields."
+
+#: templates/views/shop/home/index.view.php:14
+msgid "Imagem de entregador com uma encomenda"
+msgstr "Image of a delivery person with a package"
+
+#: templates/views/shop/home/index.view.php:21
+msgid "Nossos produtos:"
+msgstr "Our products:"
+
+#: templates/views/shop/home/index.view.php:40
+msgid "Ver detalhes"
+msgstr "View details"
+
+#: templates/views/shop/home/index.view.php:48
+msgid "Ver mais produtos"
+msgstr "View more products"
+
+#: templates/views/shop/home/contact.view.php:3
+msgid "Central de atendimento"
+msgstr "Customer Service"
+
+#: templates/views/shop/home/contact.view.php:8
+msgid "Tópicos frequentes"
+msgstr "Frequent topics"
+
+#: templates/views/shop/home/contact.view.php:24
+msgid "Perguntas frequentes"
+msgstr "Frequently asked questions"
+
+#: templates/views/shop/home/contact.view.php:39
+msgid "Inscreva-se para receber novidades e ofertas especiais"
+msgstr "Subscribe to receive news and special offers"
+
+#: templates/views/shop/home/contact.view.php:43
+msgid "Insira seu e-mail..."
+msgstr "Enter your email..."
+
+#: templates/views/shop/home/contact.view.php:48
+msgid "Inscrever-se"
+msgstr "Subscribe"
+
+#: templates/views/shop/user/register.view.php:6
+msgid "Criar conta"
+msgstr "Create account"
+
+#: templates/views/shop/user/register.view.php:14
+#: templates/views/shop/user/login.view.php:24
+msgid "E-mail"
+msgstr "Email"
+
+#: templates/views/shop/user/register.view.php:26
+msgid "Cadastrar"
+msgstr "Register"
+
+#: templates/views/shop/user/register.view.php:30
+msgid "Já possui uma conta?"
+msgstr "Already have an account?"
+
+#: templates/views/shop/user/register.view.php:30
+msgid "Entre"
+msgstr "Login"
+
+#: templates/views/shop/user/register.view.php:38
+msgid "Deno"
+msgstr "Deno"
+
+#: templates/views/shop/user/register.view.php:42
+msgid ""
+"Para ter acesso em todos os nossos serviços e finalizar suas compras, crie "
+"uma conta."
+msgstr ""
+"To access all our services and complete your purchases, create an account."
+
+#: templates/views/shop/user/register.view.php:45
+#: templates/views/shop/user/login.view.php:12
+msgid "Imagem de fundo de login"
+msgstr "Login background image"
+
+#: templates/views/shop/user/login.view.php:5
+msgid "Bem-vindo de volta"
+msgstr "Welcome back"
+
+#: templates/views/shop/user/login.view.php:9
+msgid ""
+"Para ter acesso em todos os nossos serviços e finalizar suas compras, entre "
+"com sua conta."
+msgstr ""
+"To access all our services and complete your purchases, log in with your account."
+
+#: templates/views/shop/user/login.view.php:20
+msgid "Entre com sua conta"
+msgstr "Log in with your account"
+
+#: templates/views/shop/user/login.view.php:40
+msgid "Não possui uma conta?"
+msgstr "Don't have an account?"
+
+#: templates/views/shop/user/login.view.php:40
+msgid "Cadastre-se"
+msgstr "Sign up"
+
+#: templates/views/shop/user/choice.view.php:3
+msgid "Você não está logado"
+msgstr "You are not logged in"
+
+#: templates/views/shop/user/choice.view.php:7
+msgid ""
+"Para prosseguir com suas compras em nosso site, crie uma conta ou entre com "
+"a sua."
+msgstr ""
+"To proceed with your purchases on our site, create an account or log in with yours."
+
+#: templates/views/shop/user/choice.view.php:19
+msgid "Cadastrar-se"
+msgstr "Sign up"
+
+#: templates/views/shop/user/choice.view.php:26
+msgid "É administrador? Entre aqui."
+msgstr "Are you an administrator? Log in here."
+
+#: templates/fragments/Navbar.php:10
+msgid "Pesquisar..."
+msgstr "Search..."
+
+#: templates/fragments/Navbar.php:13
+msgid "Pesquisar"
+msgstr "Search"
+
+#: templates/fragments/Navbar.php:25 app/Controller/HomeController.php:15
+msgid "Início"
+msgstr "Home"
+
+#: templates/fragments/Navbar.php:39 app/Controller/HomeController.php:40
+msgid "Atendimento"
+msgstr "Customer service"
+
+#: templates/fragments/Navbar.php:58 templates/layouts/backoffice.layout.php:6
+msgid "Fechar menu"
+msgstr "Close menu"
+
+#: templates/fragments/Navbar.php:58 templates/layouts/backoffice.layout.php:6
+msgid "Abrir menu"
+msgstr "Open menu"
+
+#: templates/fragments/Navbar.php:75
+msgid "Seu carrinho"
+msgstr "Your cart"
+
+#: templates/fragments/Navbar.php:83 templates/layouts/backoffice.layout.php:23
+#: templates/layouts/backoffice.layout.php:27
+msgid "Sua conta"
+msgstr "Your account"
+
+#: templates/bricks/admin/login/invalid_credentials.brick.php:2
+msgid "Nome de usuário ou senha inválido(s)."
+msgstr "Invalid username or password."
+
+#: templates/bricks/category/list_paginator.brick.php:8
+#: templates/bricks/product/list_paginator.brick.php:8
+msgid "Nenhum resultado encontrado"
+msgstr "No results found"
+
+#: templates/bricks/category/list_paginator.brick.php:15
+#: templates/bricks/product/list_paginator.brick.php:18
+msgid "Última atualização"
+msgstr "Last update"
+
+#: templates/bricks/category/list_paginator.brick.php:16
+#: templates/bricks/product/list_paginator.brick.php:19
+msgid "Ações"
+msgstr "Actions"
+
+#: templates/bricks/product/list_paginator.brick.php:15
+msgid "Valor"
+msgstr "Price"
+
+#: templates/bricks/product/list_paginator.brick.php:16
+msgid "Estoque"
+msgstr "Stock"
+
+#: templates/bricks/product/list_paginator.brick.php:17
+msgid "Parcelável"
+msgstr "Installments"
+
+#: templates/bricks/product/list_paginator.brick.php:39
+msgid "Sim"
+msgstr "Yes"
+
+#: templates/bricks/product/list_paginator.brick.php:39
+msgid "Não"
+msgstr "No"
+
+#: templates/bricks/user/register/already_exists.brick.php:2
+msgid "E-mail já cadastrado."
+msgstr "Email already registered."
+
+#: templates/bricks/user/login/invalid_credentials.brick.php:2
+msgid "E-mail ou senha inválido(s)."
+msgstr "Invalid email or password."
+
+#: templates/layouts/backoffice.layout.php:17
+msgid "Fechar"
+msgstr "Close"
+
+#: templates/layouts/backoffice.layout.php:33
+#: templates/layouts/backoffice.layout.php:37
+msgid "Usuários"
+msgstr "Users"
+
+#: templates/layouts/backoffice.layout.php:43
+#: templates/layouts/backoffice.layout.php:47
+msgid "Administradores"
+msgstr "Administrators"
+
+#: templates/layouts/backoffice.layout.php:53
+#: templates/layouts/backoffice.layout.php:57
+msgid "Carrinhos"
+msgstr "Carts"
+
+#: templates/layouts/backoffice.layout.php:83
+#: templates/layouts/backoffice.layout.php:87
+msgid "Sair"
+msgstr "Logout"
+
+#: app/Repo/User.php:38
+msgid "Nome obrigatório."
+msgstr "Name required."
+
+#: app/Repo/User.php:42
+msgid "E-mail obrigatório."
+msgstr "Email required."
+
+#: app/Repo/User.php:46
+msgid "Senha obrigatória."
+msgstr "Password required."
+
+#: app/Repo/User.php:48
+msgid "A senha deve ter no mínimo 12 caracteres."
+msgstr "The password must be at least 12 characters long."
+
+#: app/Web/Paginator.php:66
+msgid "Foi encontrado 1 resultado"
+msgstr "1 result found"
+
+#: app/Web/Paginator.php:68
+msgid "Foram encontrados"
+msgstr "Found"
+
+#: app/Web/Paginator.php:68
+msgid "resultados"
+msgstr "results"
+
+#: app/Web/Paginator.php:82
+msgid "Página"
+msgstr "Page"
+
+#: app/Web/Paginator.php:90
+msgid "Avançar"
+msgstr "Next"
+
+#: app/Controller/UserController.php:50
+msgid "Registrar-se"
+msgstr "Register"

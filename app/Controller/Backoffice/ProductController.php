@@ -3,6 +3,7 @@
 namespace App\Controller\Backoffice;
 
 use App\Controller\Controller;
+use App\Utils\Validator;
 use App\Web\Brick;
 use App\Web\Paginator;
 use App\Web\Request;
@@ -34,6 +35,21 @@ class ProductController extends Controller
       'backoffice/product/index',
       layout: 'backoffice',
       paginator_brick: $paginator_brick,
+    );
+  }
+
+  public function manage()
+  {
+    $product_id = Request::get_path_variable('product_id');
+
+    $product = Validator::is_valid_uuid($product_id)
+      ? \App\Repo\Product::first(['id', '=', $product_id])
+      : null;
+
+    return View::render(
+      'backoffice/product/manage',
+      layout: 'backoffice',
+      product: $product
     );
   }
 }
