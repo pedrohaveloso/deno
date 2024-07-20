@@ -6,8 +6,8 @@ final class Response
 {
   public static function redirect(string $to)
   {
-    http_response_code(301);
-    header('Location: ' . $to);
+    http_response_code(302);
+    header("Location: $to");
     exit;
   }
 }

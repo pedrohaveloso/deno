@@ -13,10 +13,14 @@ return new class extends Router {
     );
 
     self::get('/backoffice', 'backoffice@index');
+
     self::get('/backoffice/categories', 'backoffice/category@index');
+    self::get('/backoffice/categories/{category_id}', 'backoffice/category@manage');
+    self::get('/backoffice/categories/save', 'backoffice/category@save');
 
     self::get('/backoffice/products', 'backoffice/product@index');
     self::get('/backoffice/products/{product_id}', 'backoffice/product@manage');
+    self::get('/backoffice/products/save', 'backoffice/product@save');
 
     self::get('/admin/logoff', 'admin@logoff');
 

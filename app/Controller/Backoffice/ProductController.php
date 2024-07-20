@@ -43,13 +43,21 @@ class ProductController extends Controller
     $product_id = Request::get_path_variable('product_id');
 
     $product = Validator::is_valid_uuid($product_id)
-      ? \App\Repo\Product::first(['id', '=', $product_id])
+      ? \App\Repo\Product::by_id($product_id)
       : null;
+
+    $categories = \App\Repo\Category::get();
 
     return View::render(
       'backoffice/product/manage',
       layout: 'backoffice',
-      product: $product
+      product: $product,
+      categories: $categories,
     );
+  }
+
+  public function save()
+  {
+    dd('---');
   }
 }

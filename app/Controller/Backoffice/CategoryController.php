@@ -36,4 +36,9 @@ class CategoryController extends Controller
       paginator_brick: $paginator_brick,
     );
   }
+
+  public function manage()
+  {
+    
+  }
 }

@@ -21,7 +21,9 @@ export default function (element) {
         input instanceof HTMLTextAreaElement ||
         input instanceof HTMLSelectElement
       ) {
-        input.value = values[input.name];
+        if (values[input.name] !== undefined) {
+          input.value = values[input.name];
+        }
       }
     });
   }

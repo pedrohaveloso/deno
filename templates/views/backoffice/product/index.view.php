@@ -1,5 +1,5 @@
 <Backoffice\Main>
-  <div class="flex justify-between">
+  <Backoffice\Main\Header>
     <Breadcrumb>
       <?= _('Produtos') ?>
     </Breadcrumb>
@@ -7,7 +7,7 @@
     <Button\Primary href="/backoffice/products/add" class="px-8 py-2">
       <?= _('Adicionar') ?>
     </Button\Primary>
-  </div>
+  </Backoffice\Main\Header>
 
   <form action="/backoffice/products"
     class="flex gap-2 bg-gray-50 rounded-3xl p-8">

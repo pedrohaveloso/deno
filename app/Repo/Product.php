@@ -4,6 +4,15 @@ namespace App\Repo;
 
 class Product extends Repo
 {
+  public static function by_id(string $product_id): array|null
+  {
+    $product = self::table(Product::name())
+      ->where(Product::col('id'), '=', $product_id)
+      ->first();
+
+    return $product;
+  }
+
   public static function get_all_query(
     string $name = null,
     string $description = null
