@@ -1,7 +1,9 @@
 FROM node:16
 
+USER root
+
 COPY ../../../ ./deno
 
 WORKDIR /deno/priv
 
-CMD npm install && npx tailwindcss -i /deno/assets/styles/global.css -o /deno/public/assets/styles/tailwind.css --watch
+CMD chmod -R 777 /deno && npm install && npx tailwindcss -i /deno/public/assets/styles/global.css -o /deno/public/assets/styles/tailwind.css --watch

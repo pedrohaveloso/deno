@@ -1,7 +1,0 @@
-FROM composer
-
-COPY ../../../ ./deno
-
-WORKDIR /deno/priv
-
-CMD ["composer", "install"]

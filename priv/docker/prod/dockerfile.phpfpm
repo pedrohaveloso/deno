@@ -1,8 +1,0 @@
-FROM php:8.3-fpm
-
-RUN apt-get update && \
-  apt-get install -y locales libpq-dev libicu-dev curl git unzip && \
-  locale-gen en_US.UTF-8 && update-locale && \
-  docker-php-ext-install pdo pdo_pgsql gettext intl
-
-CMD [ "php-fpm" ]

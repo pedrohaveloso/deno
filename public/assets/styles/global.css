@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: "Poppins", "Verdana", "Helvetica", "Arial";
+}
+
+.text-error {
+  @apply text-red-500;
+}
+
+table {
+  @apply overflow-hidden;
+  @apply rounded-3xl;
+}
+
+table thead tr th {
+  @apply p-4;
+  @apply bg-indigo-800;
+  @apply text-white;
+  @apply font-medium;
+}
+
+table tbody tr td {
+  @apply p-4;
+  @apply bg-indigo-50;
+  @apply border-y-2;
+  @apply border-white;
+  @apply text-center;
+}
+
+/* Desabilitar cor ao autocompletar input */
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  transition: background-color 600000s 0s, color 600000s 0s;
+}
+
+input[data-autocompleted] {
+  background-color: transparent !important;
+}
+
+input::placeholder {
+  @apply text-gray-600;
+}
+
+button {
+  font-weight: 500;
+}

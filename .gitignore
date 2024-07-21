@@ -6,4 +6,4 @@ priv/node_modules
 
 priv/config/local.php
 
-public/assets
+public/**/*tailwind*
