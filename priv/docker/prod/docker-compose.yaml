@@ -31,8 +31,6 @@ services:
     tty: true
     volumes:
       - ../../../:/deno
-      - ../../../assets:/deno/public/assets
-      - ../../../deno/public/assets:/deno/public/assets
 
   deno-composer:
     build:

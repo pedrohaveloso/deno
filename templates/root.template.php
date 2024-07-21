@@ -18,11 +18,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Deno shop page">
 
-  <link rel="shortcut icon" href="/public/assets/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="/public/assets/favicon.ico"
+    type="image/x-icon">
 
   <!-- --------------------------------------------------------------------- -->
   <!-- App styles: -->
-  <link href="/public/assets/styles/output.css" rel="stylesheet">
+  <link href="/public/assets/styles/tailwind.css" rel="stylesheet">
 
   <!-- --------------------------------------------------------------------- -->
   <!-- Google Fonts: -->
@@ -51,8 +52,10 @@
 
   <!-- --------------------------------------------------------------------- -->
   <!-- AlpineJS script: -->
-  <script defer src="/public/assets/scripts/alpinejs/persist-3.14.1.min.js"></script>
-  <script defer src="/public/assets/scripts/alpinejs/alpinejs-3.14.1.min.js"></script>
+  <script defer
+    src="/public/assets/scripts/alpinejs/persist-3.14.1.min.js"></script>
+  <script defer
+    src="/public/assets/scripts/alpinejs/alpinejs-3.14.1.min.js"></script>
 
   <!-- --------------------------------------------------------------------- -->
   <!-- HTMX script: -->
@@ -69,7 +72,8 @@
 
   <!-- --------------------------------------------------------------------- -->
   <!-- VLibras script: -->
-  <script defer src="/public/assets/scripts/vlibras/vlibras-6.0.0.min.js"></script>
+  <script defer
+    src="/public/assets/scripts/vlibras/vlibras-6.0.0.min.js"></script>
   <script defer>
     document.addEventListener("DOMContentLoaded", () => {
       new window.VLibras.Widget('https://vlibras.gov.br/app');

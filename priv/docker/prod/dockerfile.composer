@@ -4,4 +4,4 @@ COPY ../../../ ./deno
 
 WORKDIR /deno/priv
 
-CMD composer install
+CMD ["composer", "install"]

@@ -5,4 +5,4 @@ RUN apt-get update && \
   locale-gen en_US.UTF-8 && update-locale && \
   docker-php-ext-install pdo pdo_pgsql gettext intl
 
-CMD php-fpm
+CMD [ "php-fpm" ]

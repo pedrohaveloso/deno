@@ -1,0 +1,22 @@
+FROM node:16
+
+COPY ../../../ ./deno
+
+WORKDIR /deno/priv
+
+ENV NPM_CONFIG_CACHE=/deno/priv/cache/npm_cache
+
+RUN npm install \
+  tailwindcss \
+  postcss-cli \
+  autoprefixer \
+  terser \
+  chokidar-cli -g
+
+ENV SHELL /bin/bash
+
+CMD mkdir -p /deno/public/assets/styles /deno/public/assets/scripts && \
+  npm install && \
+  npx tailwindcss -i /deno/assets/styles/global.css -o /deno/public/assets/styles/output.css --watch & \
+  npx chokidar "/deno/assets/styles/*.css" -c "npx postcss /deno/public/assets/styles/output.css -o /deno/public/assets/styles/output.min.css --use autoprefixer" & \
+  npx chokidar "/deno/assets/scripts/*.js" -c "npx terser /deno/assets/scripts/*.js -o /deno/public/assets/scripts/output.min.js --compress --mangle"
