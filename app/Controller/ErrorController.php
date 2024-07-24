@@ -9,10 +9,10 @@ class ErrorController extends Controller
 {
   public function not_found()
   {
-    $origin_is_backoffice = explode(
-      '/',
-      parse_url(Request::origin_url(), PHP_URL_PATH),
-    )[1] ?? '' === 'backoffice';
+    $origin_path = parse_url(Request::origin_url(), PHP_URL_PATH);
+    $origin_root = explode('/', $origin_path)[0] ?? '';
+
+    $origin_is_backoffice = $origin_root === 'backoffice';
 
     if ($origin_is_backoffice) {
       return View::render(
@@ -20,12 +20,12 @@ class ErrorController extends Controller
         layout: 'backoffice',
         page_title: _('Página não encontrada')
       );
+    } else {
+      return View::render(
+        'shop/error/not_found',
+        layout: 'shop',
+        page_title: _('Página não encontrada')
+      );
     }
-
-    return View::render(
-      'shop/error/not_found',
-      layout: 'shop',
-      page_title: _('Página não encontrada')
-    );
   }
 }

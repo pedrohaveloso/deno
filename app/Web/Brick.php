@@ -11,7 +11,12 @@ final class Brick
     extract($attributes);
 
     ob_start();
+
+    echo '<!-- ------------------------------ -->';
+    echo "<!-- $name brick: -->";
+
     include BRICKSDIR . '/' . $name . '.brick.php';
+
     $brick_content = ob_get_clean();
 
     $brick_content = self::render_fragments($brick_content);
@@ -26,7 +31,7 @@ final class Brick
 
   public static function render(string $brick_content)
   {
-    echo $brick_content;
+    echo self::remove_html_comments($brick_content);
   }
 
   public static function redirect(string $to)

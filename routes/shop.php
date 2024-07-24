@@ -14,6 +14,7 @@ return new class extends Router {
     self::get('/home', 'home@index');
     self::get('/contact', 'home@contact');
     self::get('/products', 'product@index');
+    self::get('/cart', 'cart@index');
 
     self::guard_start(
       'user_is_logged',

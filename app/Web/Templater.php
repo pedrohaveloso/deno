@@ -2,8 +2,17 @@
 
 namespace App\Web;
 
+use App\Core\LocalConfig;
+
 trait Templater
 {
+  protected static function remove_html_comments(string $template): string
+  {
+    return LocalConfig::get_remove_html_comments()
+      ? preg_replace("~<!--(.*?)-->~s", "", $template)
+      : $template;
+  }
+
   protected static function render_layout()
   {
   }
@@ -56,6 +65,9 @@ trait Templater
 
         ob_start();
 
+        echo '<!-- ------------------------------ -->';
+        echo "<!-- $name fragment: -->";
+
         $scope = function () use ($name, $children, $attr) {
           $name = str_replace('\\', '/', $name);
 
@@ -71,6 +83,6 @@ trait Templater
       $content
     );
 
-    return $content;
+    return self::remove_html_comments($content);
   }
 }
