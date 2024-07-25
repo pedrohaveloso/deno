@@ -1,8 +1,8 @@
 <header class="p-4 fixed">
   <a href="/user/choice">
-    <Button\Primary class="py-2 px-4">
+    <Button.Primary class="py-2 px-4">
       <?= _('Voltar') ?>
-    </Button\Primary>
+    </Button.Primary>
   </a>
 </header>
 
@@ -16,22 +16,22 @@
     </h1>
 
     <div class="flex-col flex gap-4">
-      <Input\Generic id="username" name="username" required="true"
+      <Input.Generic id="username" name="username" required="true"
         placeholder="<?= _('Digite seu usuário...') ?>"
         label="<?= _('Usuário') ?>">
-      </Input\Generic>
+      </Input.Generic>
 
-      <Input\Generic id="password" name="password" type="password"
+      <Input.Generic id="password" name="password" type="password"
         required="true" placeholder="<?= _('Digite sua senha...') ?>"
         label="<?= _('Senha') ?>">
-      </Input\Generic>
+      </Input.Generic>
 
       <div id="error" class="mt-4">
       </div>
     </div>
 
-    <Button\Primary class="h-12" type="submit">
+    <Button.Primary class="h-12" type="submit">
       <?= _('Entrar') ?>
-    </Button\Primary>
+    </Button.Primary>
   </form>
 </main>

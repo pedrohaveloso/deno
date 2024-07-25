@@ -9,7 +9,8 @@
       <?= _('Para ter acesso em todos os nossos serviços e finalizar suas compras, entre com sua conta.') ?>
     </p>
 
-    <img loading="lazy" src="/public/assets/images/login_banner.webp" alt="<?= _('Imagem de fundo de login') ?>"
+    <img loading="lazy" src="/public/assets/images/login_banner.webp"
+      alt="<?= _('Imagem de fundo de login') ?>"
       class="rounded-2xl absolute w-full h-full bg-indigo-800">
   </div>
 
@@ -21,23 +22,25 @@
       </h2>
 
       <div class="flex flex-col gap-4 w-full" id="form-inputs">
-        <Input\Generic id="email" name="email" label="<?= _('E-mail') ?>" icon="contact" required="true" type="email"
+        <Input.Generic id="email" name="email" label="<?= _('E-mail') ?>"
+          icon="contact" required="true" type="email"
           placeholder="joaosilva@email.com">
-        </Input\Generic>
+        </Input.Generic>
 
-        <Input\Generic id="password" name="password" label="<?= _('Senha') ?>" icon="key" required="true"
-          type="password" placeholder="************">
-        </Input\Generic>
+        <Input.Generic id="password" name="password" label="<?= _('Senha') ?>"
+          icon="key" required="true" type="password" placeholder="************">
+        </Input.Generic>
       </div>
 
       <div id="error"></div>
 
-      <Button\Primary type="submit" class="w-full h-12 sm:h-14">
+      <Button.Primary type="submit" class="w-full h-12 sm:h-14">
         <?= _('Entrar') ?>
-      </Button\Primary>
+      </Button.Primary>
 
       <a href="/user/register">
-        <?= _('Não possui uma conta?') ?> <strong><?= _('Cadastre-se') ?></strong>.
+        <?= _('Não possui uma conta?') ?>
+        <strong><?= _('Cadastre-se') ?></strong>.
       </a>
     </form>
   </div>

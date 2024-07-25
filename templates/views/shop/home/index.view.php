@@ -10,7 +10,8 @@
       capacitam empresas a se destacarem em seus respectivos campos.') ?>
     </p>
 
-    <img class="w-full sm:w-2/3 lg:w-1/3 h-full" src="/public/assets/images/delivery_img.svg"
+    <img class="w-full sm:w-2/3 lg:w-1/3 h-full"
+      src="/public/assets/images/delivery_img.svg"
       alt="<?= _('Imagem de entregador com uma encomenda') ?>">
   </section>
 
@@ -21,32 +22,35 @@
       <?= _('Nossos produtos:') ?>
     </h2>
 
-    <div class="w-full grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-8">
+    <div
+      class="w-full grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-8">
       <? for ($i = 0; $i < 8; $i++): ?>
-        <article class="w-full bg-indigo-50 text-center rounded-3xl p-4 flex flex-col gap-4">
+        <article
+          class="w-full bg-indigo-50 text-center rounded-3xl p-4 flex flex-col gap-4">
           <p class="text-lg font-medium">Trator P.24 / 40</p>
 
           <img loading="lazy" class="py-2 h-52 w-full object-scale-down"
             src="https://www.deere.com.br/assets/images/region-3/products/tractors/5e-series/trator-pequeno-5080e-desktop-1009x768.png"
             alt="Produto em destaque: @TODO TODO COLOCAR O NOME AQUI...">
 
-          <p class="text-end">10x de <strong class="text-lg">R$ 9999,99</strong></p>
+          <p class="text-end">10x de <strong class="text-lg">R$ 9999,99</strong>
+          </p>
 
-          <Button\Accent class="w-full h-10">
+          <Button.Accent class="w-full h-10">
             <?= _('Adicionar') ?>
-          </Button\Accent>
+          </Button.Accent>
 
-          <Button\Secondary class="w-full h-10">
+          <Button.Secondary class="w-full h-10">
             <?= _('Ver detalhes') ?>
-          </Button\Secondary>
+          </Button.Secondary>
         </article>
       <? endfor ?>
     </div>
 
     <a href="/products" class="w-full text-center">
-      <Button\Primary class="w-full sm:max-w-96 h-14 text-xl">
+      <Button.Primary class="w-full sm:max-w-96 h-14 text-xl">
         <?= _('Ver mais produtos') ?>
-      </Button\Primary>
+      </Button.Primary>
     </a>
   </section>
 </main>

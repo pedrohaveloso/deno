@@ -1,1 +1,1 @@
-<Backoffice\Main></Backoffice\Main>
+<Backoffice.Main></Backoffice.Main>

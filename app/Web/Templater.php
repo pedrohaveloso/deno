@@ -19,7 +19,7 @@ trait Templater
 
   protected static function render_fragments(string $content): string
   {
-    $fragments_pattern = '/<([A-Z][\\\a-zA-Z0-9]*)([^>]*)>(.*?)<\/\1>/s';
+    $fragments_pattern = '/<([A-Z][\.a-zA-Z0-9]*)([^>]*)>(.*?)<\/\1>/s';
 
     $content = preg_replace_callback(
       $fragments_pattern,
@@ -69,7 +69,7 @@ trait Templater
         echo "<!-- $name fragment: -->";
 
         $scope = function () use ($name, $children, $attr) {
-          $name = str_replace('\\', '/', $name);
+          $name = str_replace('.', '/', $name);
 
           include FRAGMENTSDIR . $name . '.php';
         };

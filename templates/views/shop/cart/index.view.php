@@ -2,9 +2,9 @@
   <header
     class="flex flex-col lg:flex-row lg:items-center justify-between w-full gap-8">
     <div class="flex items-center gap-4 lg:gap-8">
-      <Button\Secondary class="py-2 px-4" onclick="history.go(-1)">
+      <Button.Secondary class="py-2 px-4" onclick="history.go(-1)">
         <?= _('Voltar') ?>
-      </Button\Secondary>
+      </Button.Secondary>
 
       <h1 class="text-2xl font-medium">
         <?= _('Seu carrinho') ?>
@@ -18,19 +18,19 @@
         R$ 530.000,00
       </p>
 
-      <Button\Secondary class="py-2 px-4 w-full lg:w-fit">
+      <Button.Secondary class="py-2 px-4 w-full lg:w-fit">
         <?= _('Limpar carrinho') ?>
-      </Button\Secondary>
+      </Button.Secondary>
 
-      <Button\Primary class="py-2 px-4 w-full lg:w-fit">
+      <Button.Primary class="py-2 px-4 w-full lg:w-fit">
         <?= _('Prosseguir com a compra') ?>
-      </Button\Primary>
+      </Button.Primary>
     </div>
   </header>
 
   <section
     class="grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 place-items-center grow w-fit">
-    <? for ($i = 0; $i < 4; $i++): ?>
+    <? for ($i = 0; $i < 100; $i++): ?>
       <article
         class="rounded-3xl p-4 gap-4 text-center border-2 border-indigo-100 flex flex-col">
         <h2 class="text-lg">
@@ -46,13 +46,13 @@
           <div class="flex flex-col w-full gap-2">
             <p>10x de R$ 9999,99</p>
 
-            <Button\Accent class="py-2 px-4">
+            <Button.Accent class="py-2 px-4">
               <?= _('Ver detalhes') ?>
-            </Button\Accent>
+            </Button.Accent>
 
-            <Button\Secondary class="py-2 px-4">
+            <Button.Secondary class="py-2 px-4">
               <?= _('Remover') ?>
-            </Button\Secondary>
+            </Button.Secondary>
           </div>
         </div>
       </article>
