@@ -5,7 +5,7 @@
  */
 export default function (element) {
   if (element instanceof HTMLFormElement) {
-    let values = element.getAttribute("data-hook-values");
+    let values = element.getAttribute("data-fill-form");
 
     try {
       values = JSON.parse(values ?? "");
