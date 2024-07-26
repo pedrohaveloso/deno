@@ -1,6 +1,9 @@
 // @ts-check
 
 /**
+ * Preenche todas as entradas de um {@link HTMLFormElement} [element] com os
+ * valores fornecidos no atributo [data-fill-form] num formato JSON.
+ *
  * @param {HTMLElement} element
  */
 export default function (element) {

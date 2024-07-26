@@ -31,14 +31,14 @@ trait Templater
         $attributes = [];
 
         preg_match_all(
-          '/([a-zA-Z0-9_:-]+)="([^"]*)"/',
+          '/([a-zA-Z0-9_:-]+)(?:="([^"]*)")?/',
           $attributes_string,
           $attributes_matches,
           PREG_SET_ORDER
         );
 
         foreach ($attributes_matches as $attr) {
-          $attributes[$attr[1]] = $attr[2];
+          $attributes[$attr[1]] = $attr[2] ?? '';
         }
 
         $printed_attr = [];

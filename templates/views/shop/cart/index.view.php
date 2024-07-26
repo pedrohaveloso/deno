@@ -18,21 +18,21 @@
         R$ 530.000,00
       </p>
 
-      <template data-hook-modal-name="clear-cart">
+      <Modal data-hook-modal-name="clear-cart">
         <p>
           <?= _('Tem certeza que deseja limpar o carrinho?') ?>
         </p>
 
-        <div class="flex">
-          <Button.Secondary data-hook-modal-close="clear-cart">
+        <div class="flex gap-2">
+          <Button.Secondary class="py-2 px-4" data-hook-modal-close>
             <?= _('Cancelar') ?>
           </Button.Secondary>
 
-          <Button.Primary>
-            <?= _('Limpar') ?>
+          <Button.Primary class="py-2 px-4">
+            <?= _('Limpar carrinho') ?>
           </Button.Primary>
         </div>
-      </template>
+      </Modal>
 
       <Button.Secondary class="py-2 px-4 w-full lg:w-fit" data-hook="modal"
         data-hook-modal-open="clear-cart">
