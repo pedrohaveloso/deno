@@ -76,25 +76,22 @@ class Migrator
   }
 
   public function start(array $arguments): void
-  {    
+  {
     if (!empty($arguments[2]) && !ctype_digit($arguments[2])) {
-      throw new Exception('Quantidade ' . $arguments[2] . ' inválida.');
+      throw new Exception("Quantidade $arguments[2] inválida.");
     }
 
     $this->migrated = $this->get_migrated_file();
 
-    if (!empty($arguments[2])) {
-      $number = $arguments[2];
-    } else {
-      $number = null;
-    }
+    $number = $arguments[2] ?: null;
 
     $options = [
       'up' => fn($number) => $this->up($number),
       'down' => fn($number) => $this->down($number),
     ];
 
-    ($options[$arguments[1] ?? 0] ?? fn($_) => $this->invalid_option())($number);
+    ($options[$arguments[1] ?? 0] ?? fn($_) => $this->invalid_option())
+    ($number);
 
     $this->save_migrated_file();
 
@@ -134,7 +131,7 @@ class Migrator
       return;
     }
 
-    $number = $number ?? count($migrations);
+    $number ??= count($migrations);
     $count = 0;
 
     foreach ($migrations as $migration) {
@@ -165,7 +162,7 @@ class Migrator
       return;
     }
 
-    $number = $number ?? count($migrations);
+    $number ??= count($migrations);
     $count = 0;
 
     $migrations = array_reverse($migrations);
