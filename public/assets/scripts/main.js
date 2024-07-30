@@ -19,15 +19,7 @@ document.querySelectorAll("[data-hook]")?.forEach(async (element) => {
     return;
   }
 
-  const hook = await import("/public/assets/scripts/hooks/" + hookName + ".js");
+  const hook = await import("./hooks/" + hookName + ".js");
 
   await hook.default(element);
-
-  const attributes = Object.entries(element.attributes);
-
-  attributes.forEach((attribute) => {
-    if (attribute[1].name.startsWith("data-hook")) {
-      element.removeAttribute(attribute[1].name);
-    }
-  });
 });

@@ -18,13 +18,18 @@
         R$ 530.000,00
       </p>
 
-      <Modal data-hook-modal-name="clear-cart">
+      <Button.Secondary class="py-2 px-4 w-full lg:w-fit" data-hook="modal"
+        data-modal-open="clear-cart">
+        <?= _('Limpar carrinho') ?>
+      </Button.Secondary>
+
+      <Modal data-modal-name="clear-cart">
         <p>
           <?= _('Tem certeza que deseja limpar o carrinho?') ?>
         </p>
 
         <div class="flex gap-2">
-          <Button.Secondary class="py-2 px-4" data-hook-modal-close>
+          <Button.Secondary class="py-2 px-4" data-modal-close>
             <?= _('Cancelar') ?>
           </Button.Secondary>
 
@@ -33,11 +38,6 @@
           </Button.Primary>
         </div>
       </Modal>
-
-      <Button.Secondary class="py-2 px-4 w-full lg:w-fit" data-hook="modal"
-        data-hook-modal-open="clear-cart">
-        <?= _('Limpar carrinho') ?>
-      </Button.Secondary>
 
       <Button.Primary class="py-2 px-4 w-full lg:w-fit">
         <?= _('Prosseguir com a compra') ?>

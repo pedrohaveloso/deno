@@ -4,7 +4,7 @@
  * @param {HTMLElement} element
  */
 export default function (element) {
-  const modalName = element.getAttribute("data-hook-modal-open");
+  const modalName = element.getAttribute("data-modal-open");
 
   if (modalName === null || modalName === "") {
     return;
@@ -81,7 +81,7 @@ const dialogStyle = [
  */
 function createModal(modalName) {
   const template = document.querySelector(
-    `template[data-hook-modal-name="${modalName}"]`
+    `template[data-modal-name="${modalName}"]`
   );
 
   if (!(template instanceof HTMLTemplateElement)) {
@@ -96,7 +96,7 @@ function createModal(modalName) {
 
   dialog.classList.add(...dialogStyle);
 
-  dialog.querySelectorAll("[data-hook-modal-close]")?.forEach((element) => {
+  dialog.querySelectorAll("[data-modal-close]")?.forEach((element) => {
     element.addEventListener("click", () => closeModal(dialog));
   });
 

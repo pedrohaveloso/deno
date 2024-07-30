@@ -210,10 +210,6 @@ class QueryBuilder
     return $this;
   }
 
-  /**
-   * ---------------------------------------------------------------------------
-   */
-
   private function query()
   {
     $selects = $this->select == ['*']

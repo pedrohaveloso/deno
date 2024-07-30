@@ -30,4 +30,6 @@ export default function (element) {
       }
     });
   }
+
+  element.removeAttribute("data-fill-form");
 }

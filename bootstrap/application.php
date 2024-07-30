@@ -26,4 +26,5 @@ foreach ($router_files as $router_file) {
   ($router = include $router_file)->routes();
 }
 
-App\Core\Application::start();
+App\Core\Router::dispatch();
+App\Core\Database::close_all();
