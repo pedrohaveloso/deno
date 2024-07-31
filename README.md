@@ -1,6 +1,6 @@
 # Deno
 
-Qual o objetivo do projeto? Seguir um Figma... [Esse Figma](https://www.figma.com/design/KSsVeKaPty3zxZO5QGtrJq/Deno?node-id=0-1&t=xnvj0GpSebZ28mJM-1).
+Qual o objetivo do projeto? Seguir um Figma... <a href="https://www.figma.com/design/KSsVeKaPty3zxZO5QGtrJq/Deno?node-id=0-1&t=xnvj0GpSebZ28mJM-1" target="_blank">Esse Figma</a>.
 
 Basicamente, um _website_ de uma indústria, com seus produtos expostos e um painel backoffice (proposto pela Eficaz na Unimar, aliás). Esse era o objetivo em si, mas quis focar em outro ponto: implementar coisas novas com PHP puro.
 
@@ -28,7 +28,7 @@ Foram várias coisas criadas do zero, mas explicar tudo num README não é útil
 
 # Como rodar?
 
-Primeiramente, tenha o Docker na sua máquina, essa é o único obrigatório.
+Primeiramente, tenha o Docker na sua máquina, esse é o único requisito.
 
 Clone o projeto em alguma pasta de seu computador, dentro da pasta do projeto, faça:
 
@@ -36,7 +36,7 @@ Clone o projeto em alguma pasta de seu computador, dentro da pasta do projeto, f
 $ docker compose -f ./priv/docker/dev/docker-compose.yaml up -d
 ```
 
-Pronto, o projeto estará rodando em modo DEV,o modo PROD de rodar ainda não está finalizado.
+Pronto, o projeto estará rodando em modo DEV, o modo PROD de rodar ainda não está finalizado.
 
 Mas o banco provavelmente está sem tabelas, você precisará rodar as migrations, para isso, faça:
 
