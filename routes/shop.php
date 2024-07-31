@@ -22,8 +22,6 @@ return new class extends Router {
       fn() => Response::redirect('/user/choice')
     );
 
-    self::get('/profile', 'user@profile');
-
     self::guard_end('user_is_logged');
 
     self::guard_start(
