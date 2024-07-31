@@ -2,7 +2,7 @@
 
 Qual o objetivo do projeto? Seguir um Figma... [Esse Figma](https://www.figma.com/design/KSsVeKaPty3zxZO5QGtrJq/Deno?node-id=0-1&t=xnvj0GpSebZ28mJM-1).
 
-Basicamente, um _website_ de uma indústria, com seus produtos expostos e um painel backoffice (proposto pela Efizas na Unimar, aliás). Esse era o objetivo em si, mas quis focar em outro ponto: implementar coisas novas com PHP puro.
+Basicamente, um _website_ de uma indústria, com seus produtos expostos e um painel backoffice (proposto pela Eficaz na Unimar, aliás). Esse era o objetivo em si, mas quis focar em outro ponto: implementar coisas novas com PHP puro.
 
 Já utilizei alguns _frameworks_ PHP como Laravel, Symfony, CakePHP, mas algumas coisas como componentização visual ao lado de servidor, query builder, roteadores etc., nunca havia implementado na mão antes.
 
