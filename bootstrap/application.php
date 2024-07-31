@@ -3,10 +3,7 @@
 /**
  * -----------------------------------------------------------------------------
  * Define as constantes globais utilizadas pelo projeto e inicia o fluxo direto
- * da aplicação incluindo os arquivos de rotas e utilizando da classe Application.
- * 
- * -----------------------------------------------------------------------------
- * Para entender o fluxo do sistema, leia o arquivo README.md na raiz do projeto.
+ * da aplicação incluindo os arquivos de rotas.
  * -----------------------------------------------------------------------------
  */
 
