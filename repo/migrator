@@ -83,7 +83,7 @@ class Migrator
 
     $this->migrated = $this->get_migrated_file();
 
-    $number = $arguments[2] ?: null;
+    $number = $arguments[2] ?? null;
 
     $options = [
       'up' => fn($number) => $this->up($number),
