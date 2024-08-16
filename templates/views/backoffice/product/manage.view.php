@@ -1,9 +1,3 @@
-<?php
-
-use App\Utils\Formatter;
-
-?>
-
 <Backoffice.Main>
   <Backoffice.Main.Header>
     <Breadcrumb>
@@ -19,7 +13,7 @@ use App\Utils\Formatter;
 
   <form hx-post="/backoffice/products/save" id="product-form"
     class="flex gap-4 flex-wrap *:grow *:basis-52" data-hook="fill-form"
-    data-fill-form="<?= Formatter::array_to_attribute($product) ?>">
+    data-fill-form="<?= \App\Utils\Formatter::array_to_attribute($product) ?>">
     <Input.Hidden name="id"></Input.Hidden>
 
     <Input.Generic id="product-name" name="name" maxlength="155"
