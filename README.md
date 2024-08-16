@@ -66,7 +66,7 @@ Entre algumas outras coisas ainda não anotadas aqui, mas apenas em minha mente.
 
 # Contatos
 
-WhatsApp: [14 98183-8507](tel:+5514981838507).
+WhatsApp: [14 92002-1247](tel:+55920021247).
 
 E-mail: [contatopedrohalves@gmail.com](mailto:contatopedrohalves@gmail.com).
 
